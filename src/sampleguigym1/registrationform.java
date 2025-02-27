@@ -5,6 +5,7 @@
  */
 package sampleguigym1;
 
+import config.dbConnector;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +38,7 @@ public class registrationform extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         pw = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        reg = new javax.swing.JButton();
         Cancel = new javax.swing.JButton();
         firstname = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -79,7 +80,7 @@ public class registrationform extends javax.swing.JFrame {
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 420, 500));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 23)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("REGISTRATION FORM");
         Container.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 420, -1));
@@ -97,14 +98,14 @@ public class registrationform extends javax.swing.JFrame {
         });
         Container.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 240, 30));
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setText("REGISTER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        reg.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        reg.setText("REGISTER");
+        reg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                regActionPerformed(evt);
             }
         });
-        Container.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 110, -1));
+        Container.add(reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 110, -1));
 
         Cancel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Cancel.setText("CANCEL");
@@ -254,17 +255,28 @@ public class registrationform extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_firstnameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
+      
+        dbConnector dbc = new dbConnector();
+        if( dbc.insertData("INSERT INTO tbl_user(user_firstname, user_lastname, user_email, user_contact, user_username, user_password, user_usertype, user_status)"
+                + "VALUES('"+firstname.getText()+"','"+lastname.getText()+"','"+email.getText()+"','"+cn.getText()+"','"+un.getText()+"','"+pw.getText()+"','"+ut.getSelectedItem()+"', 'Pending')")){
+            {
+        JOptionPane.showMessageDialog(null, "Inserted Successfully!");
+        loginForm lfm = new loginForm();
+        lfm.setVisible(true);
+        this.dispose();
+       
+}
+        }
         if(firstname.getText() .isEmpty() || lastname.getText() .isEmpty() || email.getText() .isEmpty() || cn.getText() .isEmpty()
                 || un.getText() .isEmpty()
                 || ut.getSelectedIndex() == 0
                 || cpas.getText() .isEmpty()
                 || pw.getText() .isEmpty()){
             JOptionPane.showMessageDialog(null, "All fields are Required!");
-        } 
+        }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_regActionPerformed
 
     private void cpasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpasActionPerformed
         // TODO add your handling code here:
@@ -332,7 +344,6 @@ public class registrationform extends javax.swing.JFrame {
     private javax.swing.JPasswordField cpas;
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstname;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -347,6 +358,7 @@ public class registrationform extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lastname;
     private javax.swing.JPasswordField pw;
+    private javax.swing.JButton reg;
     private javax.swing.JCheckBox sp;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;

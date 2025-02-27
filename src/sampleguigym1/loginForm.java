@@ -11,6 +11,7 @@ import config.dbConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import user.userDashboard;
 
 /**
  *
@@ -25,16 +26,18 @@ public class loginForm extends javax.swing.JFrame {
         initComponents();
     }
     
-    public static boolean loginAcc(String username, String password){
+    
+  
+public static boolean loginAcc(String username, String password){
         dbConnector connector = new dbConnector();
         try{
-            String query = "SELECT * FROM tbl_user WHERE user_username = " + username +" AND user_password = " + password +"";
+            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + username + "' AND user_password = '" + password + "'";
             ResultSet resultSet = connector.getData(query);
+            return resultSet.next();
+        }catch (SQLException ex) {
             return false;
-        }catch(SQLException ex){
-            return true;
-            
         }
+
     }
 
     /**
@@ -83,9 +86,9 @@ public class loginForm extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Dark Blue and Brown Illustrative Fitness Gym Logo (5).png"))); // NOI18N
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 500));
 
-        Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 420, 510));
+        Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 420, 500));
 
-        login.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        login.setFont(new java.awt.Font("Arial", 1, 23)); // NOI18N
         login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login.setText("LOGIN FORM");
         Container.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 430, -1));
@@ -187,7 +190,7 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitActionPerformed
 
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
-        
+                                              
         if(loginAcc(username.getText(),password.getText())){
             JOptionPane.showMessageDialog(null, "Login Success!");
             adminDashboard ads = new adminDashboard();
@@ -196,6 +199,7 @@ public class loginForm extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Login Failed!");
         }
+             
     }//GEN-LAST:event_LOGINActionPerformed
 
     private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
