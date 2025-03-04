@@ -26,14 +26,22 @@ public class loginForm extends javax.swing.JFrame {
         initComponents();
     }
     
-    
   
-public static boolean loginAcc(String username, String password){
+    static String status;
+    static String type;
+    
+    public static boolean loginAcc(String username, String password){
         dbConnector connector = new dbConnector();
         try{
             String query = "SELECT * FROM tbl_user  WHERE user_username = '" + username + "' AND user_password = '" + password + "'";
             ResultSet resultSet = connector.getData(query);
-            return resultSet.next();
+            if(resultSet.next()){
+                status = resultSet.getString("user_status");
+                type = resultSet.getString("user_usertype");
+                return true;    
+            }else{
+                return false;
+            }
         }catch (SQLException ex) {
             return false;
         }
@@ -51,6 +59,7 @@ public static boolean loginAcc(String username, String password){
 
         Container = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -72,10 +81,27 @@ public static boolean loginAcc(String username, String password){
         Header.setBackground(new java.awt.Color(0, 153, 153));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("WELCOME TO GYM MANAGEMENT SYSTEM ");
-        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 36, 850, 30));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        Header.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 860, 30));
 
         Container.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 110));
 
@@ -88,10 +114,10 @@ public static boolean loginAcc(String username, String password){
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 420, 500));
 
-        login.setFont(new java.awt.Font("Arial", 1, 23)); // NOI18N
+        login.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 26)); // NOI18N
         login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         login.setText("LOGIN FORM");
-        Container.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 430, -1));
+        Container.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 430, -1));
 
         LOGIN.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         LOGIN.setText("LOGIN");
@@ -100,7 +126,7 @@ public static boolean loginAcc(String username, String password){
                 LOGINActionPerformed(evt);
             }
         });
-        Container.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 390, 110, -1));
+        Container.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 420, 110, -1));
 
         Exit.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Exit.setText("EXIT");
@@ -109,9 +135,9 @@ public static boolean loginAcc(String username, String password){
                 ExitActionPerformed(evt);
             }
         });
-        Container.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 110, -1));
+        Container.add(Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 420, 110, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("New User? Click Here to Sign-up!");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +145,7 @@ public static boolean loginAcc(String username, String password){
                 jLabel4MouseClicked(evt);
             }
         });
-        Container.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 240, 20));
+        Container.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 240, 20));
 
         username.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -128,15 +154,15 @@ public static boolean loginAcc(String username, String password){
                 usernameActionPerformed(evt);
             }
         });
-        Container.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 240, 30));
+        Container.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 240, 40));
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel7.setText("Username:");
-        Container.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 120, 50));
+        Container.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 120, 60));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel8.setText("Password:");
-        Container.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 110, 50));
+        Container.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 110, 60));
 
         showpass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         showpass.setText("Show password");
@@ -145,7 +171,7 @@ public static boolean loginAcc(String username, String password){
                 showpassActionPerformed(evt);
             }
         });
-        Container.add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 140, -1));
+        Container.add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, 140, -1));
 
         password.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -154,7 +180,7 @@ public static boolean loginAcc(String username, String password){
                 passwordActionPerformed(evt);
             }
         });
-        Container.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 240, 30));
+        Container.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 240, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,15 +216,28 @@ public static boolean loginAcc(String username, String password){
     }//GEN-LAST:event_ExitActionPerformed
 
     private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
-                                              
-        if(loginAcc(username.getText(),password.getText())){
-            JOptionPane.showMessageDialog(null, "Login Success!");
-            adminDashboard ads = new adminDashboard();
-            ads.setVisible(true);
-            this.dispose();
+       if(loginAcc(username.getText(), password.getText())){   
+        if(!status.equals("Active")){
+            JOptionPane.showMessageDialog(null, "In-Active Account, Contact the ADMIN! ");   
         }else{
-            JOptionPane.showMessageDialog(null, "Login Failed!");
+            if(type.equals("ADMIN")){  
+                 JOptionPane.showMessageDialog(null, "Login Successfully!");
+                adminDashboard ads = new adminDashboard();
+                ads.setVisible(true);
+                this.dispose();   
+            }else if(type.equals("USER")){
+                 JOptionPane.showMessageDialog(null, "Login Successfully!");
+                userDashboard usd = new userDashboard();
+                usd.setVisible(true);
+                this.dispose();     
+            }else{
+                JOptionPane.showMessageDialog(null, "No Account Type Found, Contact the ADMIN! ");
+            }
+            }   
+        }else{
+            JOptionPane.showMessageDialog(null, "Invalid Account!");
         }
+                                         
              
     }//GEN-LAST:event_LOGINActionPerformed
 
@@ -261,6 +300,7 @@ public static boolean loginAcc(String username, String password){
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel login;
     private javax.swing.JPasswordField password;
