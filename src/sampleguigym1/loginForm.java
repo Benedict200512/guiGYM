@@ -7,7 +7,10 @@ package sampleguigym1;
 
 
 import admin.adminDashboard;
+import config.Session;
 import config.dbConnector;
+import config.passwordHasher;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -32,17 +35,41 @@ public class loginForm extends javax.swing.JFrame {
     
     public static boolean loginAcc(String username, String password){
         dbConnector connector = new dbConnector();
+        
+        
+        
         try{
-            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + username + "' AND user_password = '" + password + "'";
+            String query = "SELECT * FROM tbl_user  WHERE user_username = '" + username + "'";
             ResultSet resultSet = connector.getData(query);
             if(resultSet.next()){
+                
+                
+                String hashedPass = resultSet.getNString("user_password");
+                String rehashedPass = passwordHasher.hashPassword(password);
+                
+                if(hashedPass.equals(rehashedPass)){     
                 status = resultSet.getString("user_status");
                 type = resultSet.getString("user_usertype");
-                return true;    
+                Session sess = Session.getInstance();
+                sess.setUserId(resultSet.getInt("user_id"));
+                sess.setFirstname(resultSet.getString("user_firstname"));
+                sess.setLastname(resultSet.getString("user_lastname"));
+                sess.setEmail(resultSet.getString("user_email"));
+                sess.setContact(resultSet.getString("user_contact"));
+                sess.setUsername(resultSet.getString("user_username"));
+                sess.setUsertype(resultSet.getString("user_usertype"));
+                sess.setStatus(resultSet.getString("user_status"));        
+                
+                return true;     
+                    
+                }else{
+                return false;    
+                }               
+               
             }else{
                 return false;
             }
-        }catch (SQLException ex) {
+        }catch (SQLException | NoSuchAlgorithmException ex) {
             return false;
         }
 

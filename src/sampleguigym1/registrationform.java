@@ -6,6 +6,7 @@
 package sampleguigym1;
 
 import config.dbConnector;
+import config.passwordHasher;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,7 +27,7 @@ public class registrationform extends javax.swing.JFrame {
         initComponents();
     }
     
-   public static String em, username;
+   public static String em, uname;
     
     public boolean duplicateCheck(){
         
@@ -40,10 +41,10 @@ public class registrationform extends javax.swing.JFrame {
                 em = resultSet.getString("user_email");
                 if(em.equals(email.getText())){
                     JOptionPane.showMessageDialog(null, "Email is Already Used!");
-                    email.setText("");
+                    email.setText("");  
                 }
-                username = resultSet.getString("user_username");
-                if(username.equals(un.getText())){
+                uname = resultSet.getString("user_username");
+                if(uname.equals(un.getText())){
                     JOptionPane.showMessageDialog(null, "Username is Already Used!");
                     un.setText("");
                 }
@@ -227,7 +228,7 @@ public class registrationform extends javax.swing.JFrame {
         Container.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 110, 50));
 
         ut.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT USER TYPE ", "ADMIN", "USER" }));
+        ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "USER" }));
         ut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utActionPerformed(evt);
@@ -302,11 +303,7 @@ public class registrationform extends javax.swing.JFrame {
     }//GEN-LAST:event_unActionPerformed
 
     private void cnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnActionPerformed
-    String contact = cn.getText().trim();
-        if (!contact.matches("\\d{10,}")) {
-    JOptionPane.showMessageDialog(this, "Invalid Contact Number! Must contain only numbers and be at least 10 digits long.", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
+    
     }//GEN-LAST:event_cnActionPerformed
 
     private void firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnameActionPerformed
@@ -316,17 +313,31 @@ public class registrationform extends javax.swing.JFrame {
     private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
         
         
-        if(firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty() || cn.getText().isEmpty() || un.getText().isEmpty() || pw.getText().isEmpty()){     
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-        }else if(pw.getText().length()< 8){
-        JOptionPane.showMessageDialog(null, "Password character should be 8 above");
-        pw.setText("");
-        }else if(duplicateCheck()){
-            System.out.println("Duplicate Exist");
-        }else{ 
+        if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty() || cn.getText().isEmpty() || un.getText().isEmpty() || pw.getText().isEmpty() || cpas.getText().isEmpty()) {
+           JOptionPane.showMessageDialog(null, "All fields are required!");
+        } else if (pw.getText().length() < 8) {
+           JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
+           pw.setText("");
+           cpas.setText(""); 
+        } else if (!email.getText().endsWith("@gmail.com")) {
+           JOptionPane.showMessageDialog(null, "Invalid email format..");
+           email.setText("");
+        } else if (!isValidContactNumber(cn.getText())) {
+           JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
+           cn.setText("");
+        } else if(duplicateCheck()){                 
+           System.out.println("Duplicate Exist!");  
+        } else if (!pw.getText().equals(cpas.getText())) {
+           JOptionPane.showMessageDialog(null, "Passwords do not match.");
+           pw.setText("");
+           cpas.setText(""); 
+        } else {
         dbConnector dbc = new dbConnector();
+        
+        try{
+        String pass = passwordHasher.hashPassword(pw.getText());
         if( dbc.insertData("INSERT INTO tbl_user (user_firstname, user_lastname, user_email, user_contact, user_username, user_password, user_usertype, user_status) "
-                + "VALUES ('"+firstname.getText()+"','"+lastname.getText()+"','"+email.getText()+"','"+cn.getText()+"','"+un.getText()+"','"+pw.getText()+"','"+ut.getSelectedItem()+"','Pending')")){   
+                + "VALUES ('"+firstname.getText()+"','"+lastname.getText()+"','"+email.getText()+"','"+cn.getText()+"','"+un.getText()+"','"+pass+"', '"+ut.getSelectedItem()+"','Pending')")){   
         {
             
         }
@@ -337,16 +348,18 @@ public class registrationform extends javax.swing.JFrame {
             }else{
             JOptionPane.showMessageDialog(null, "Connection Error!");    
             }
+        }catch(NoSuchAlgorithmException ex){
+            System.out.println(""+ex);
         }
+        } 
+    }
+    private boolean isValidContactNumber(String contact) {
+    return contact.matches("\\d{11}"); // Checks if the string contains only digits
+
     }//GEN-LAST:event_regActionPerformed
 
     private void cpasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpasActionPerformed
-       String confirmPassword = new String(cpas.getPassword()).trim();
-       String password = new String(pw.getPassword()).trim();
- if (!password.equals(confirmPassword)) {
-    JOptionPane.showMessageDialog(this, "Passwords do not match! Please enter the same password.", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}      
+       
     }//GEN-LAST:event_cpasActionPerformed
 
     private void lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameActionPerformed

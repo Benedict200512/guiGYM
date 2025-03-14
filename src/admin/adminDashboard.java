@@ -5,8 +5,10 @@
  */
 package admin;
 
+import config.Session;
 import javax.swing.JOptionPane;
 import sampleguigym1.loginForm;
+import user.accountDetails;
 
 /**
  *
@@ -37,12 +39,29 @@ public class adminDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        acc_name = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Container.setBackground(new java.awt.Color(0, 204, 204));
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,21 +111,21 @@ public class adminDashboard extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/images-removebg-preview (1).png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 300, 280));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 300, 240));
 
-        jTextField1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("ADMIN");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        acc_name.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        acc_name.setText("ADMIN");
+        acc_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                acc_nameActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 30));
+        jPanel2.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 30));
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 500));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel3MouseClicked(evt);
@@ -114,21 +133,90 @@ public class adminDashboard extends javax.swing.JFrame {
         });
         jPanel3.setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/852253-200.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/852253-200.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabel5MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel2);
-        jLabel2.setBounds(0, 40, 200, 90);
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(0, 40, 170, 80);
+
+        jLabel9.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel9.setText("ACCOUNT");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(60, 130, 90, 21);
+
+        Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 200, 180));
+
+        jPanel4.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel4.setLayout(null);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4773624-200-removebg-preview.png"))); // NOI18N
+        jPanel4.add(jLabel2);
+        jLabel2.setBounds(0, 10, 200, 140);
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel4.setText("USER");
-        jPanel3.add(jLabel4);
-        jLabel4.setBounds(77, 140, 50, 21);
+        jLabel4.setText("MEMBERSHIP");
+        jPanel4.add(jLabel4);
+        jLabel4.setBounds(40, 150, 120, 21);
 
-        Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 200, 180));
+        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 200, 180));
+
+        jPanel5.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel5.setLayout(null);
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/personal-trainer-glyph-icon-illustration-vector-removebg-preview.png"))); // NOI18N
+        jPanel5.add(jLabel8);
+        jLabel8.setBounds(0, 0, 200, 144);
+
+        jLabel6.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel6.setText("COACH");
+        jPanel5.add(jLabel6);
+        jLabel6.setBounds(69, 151, 60, 21);
+
+        jPanel7.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel7.setLayout(null);
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/personal-trainer-glyph-icon-illustration-vector-removebg-preview.png"))); // NOI18N
+        jPanel7.add(jLabel10);
+        jLabel10.setBounds(0, 0, 200, 144);
+
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel7.setText("COACH");
+        jPanel7.add(jLabel7);
+        jLabel7.setBounds(69, 151, 60, 21);
+
+        jPanel5.add(jPanel7);
+        jPanel7.setBounds(0, 0, 0, 0);
+
+        Container.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 200, 180));
+
+        jPanel8.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+        });
+        jPanel8.setLayout(null);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/852253-200.png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        jPanel8.add(jLabel11);
+        jLabel11.setBounds(0, 40, 170, 80);
+
+        jLabel12.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel12.setText("USER");
+        jPanel8.add(jLabel12);
+        jLabel12.setBounds(80, 130, 50, 21);
+
+        Container.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 200, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,19 +258,41 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         this.dispose();
     }    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void acc_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acc_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_acc_nameActionPerformed
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        usersForm usf = new usersForm();
-        usf.setVisible(true);
+        accountDetails accd = new accountDetails();
+        accd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        accountDetails accd = new accountDetails();
+        accd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Session sess = Session.getInstance();
+        if(sess.getUserId()== 0){
+             JOptionPane.showMessageDialog(null, "No account, Login First!");
+             loginForm lfr = new loginForm();
+             lfr.setVisible(true);
+             this.dispose();      
+        }else{
+        acc_name.setText(""+sess.getFirstname());
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel8MouseClicked
 
     /**
      * @param args the command line arguments
@@ -222,14 +332,26 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel Header;
+    private javax.swing.JTextField acc_name;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }
