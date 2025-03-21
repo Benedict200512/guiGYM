@@ -5,7 +5,11 @@
  */
 package user;
 
+import admin.adminDashboard;
 import config.Session;
+import config.dbConnector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import sampleguigym1.loginForm;
 import sampleguigym1.registrationform;
@@ -55,6 +59,10 @@ public class accountDetails extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -239,6 +247,37 @@ public class accountDetails extends javax.swing.JFrame {
         });
         Container.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 380, 20));
 
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+        jPanel4.setLayout(null);
+
+        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel5.setText("SAVE");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel4.add(jLabel5);
+        jLabel5.setBounds(30, 10, 50, 30);
+
+        jPanel5.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel5.setLayout(null);
+
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel7.setText("SAVE");
+        jPanel5.add(jLabel7);
+        jLabel7.setBounds(30, 10, 50, 30);
+
+        jPanel4.add(jPanel5);
+        jPanel5.setBounds(0, 0, 0, 0);
+
+        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 110, 50));
+
         getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
 
         pack();
@@ -334,6 +373,62 @@ public class accountDetails extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        try {
+    dbConnector dbc = new dbConnector();
+    Session sess = Session.getInstance();
+    
+    String query = "SELECT * FROM tbl_user WHERE user_id = '" + sess.getUserId() + "'";
+    ResultSet rs = dbc.getData(query);
+    
+    if (rs.next()) {
+        // Retrieve user inputs
+        String fname = firstname.getText().trim();
+        String lname = lastname.getText().trim();
+        String em = email.getText().trim();
+        String contact = cn.getText().trim();
+        String userType = ut.getSelectedItem().toString();
+        String username = un.getText().trim();
+
+        // Validation checks
+        if (fname.isEmpty() || lname.isEmpty() || em.isEmpty() || contact.isEmpty() || username.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields are required!");
+            return;
+        }
+        
+        if (!em.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(null, "Invalid email format!");
+            return;
+        }
+        
+        if (!contact.matches("^\\d{10,15}$")) {
+            JOptionPane.showMessageDialog(null, "Invalid contact number! It must be 10-15 digits long.");
+            return;
+        }
+        
+        // Update query
+        String updateQuery = "UPDATE tbl_user SET user_firstname = '" + fname + "', user_lastname = '" + lname + "', " +
+                             "user_email = '" + em + "', user_contact = '" + contact + "', " +
+                             "user_usertype = '" + userType + "', user_username = '" + username + "' " +
+                             "WHERE user_id = '" + sess.getUserId() + "'";
+        
+        dbc.updateData(updateQuery);
+        JOptionPane.showMessageDialog(null, "User details successfully updated!");
+        
+        loginForm lg = new loginForm();
+        lg.setVisible(true);
+        this.dispose();
+    }
+} catch (SQLException ex) {
+    System.out.println("SQL Error: " + ex);
+}
+
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -386,11 +481,15 @@ public class accountDetails extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField lastname;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;
