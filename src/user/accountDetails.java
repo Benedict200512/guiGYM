@@ -296,37 +296,6 @@ public class accountDetails extends javax.swing.JFrame {
 
         Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 500, 110, 50));
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
-            }
-        });
-        jPanel4.setLayout(null);
-
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel5.setText("SAVE");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-        jPanel4.add(jLabel5);
-        jLabel5.setBounds(30, 10, 50, 30);
-
-        jPanel5.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel5.setLayout(null);
-
-        jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel7.setText("SAVE");
-        jPanel5.add(jLabel7);
-        jLabel7.setBounds(30, 10, 50, 30);
-
-        jPanel4.add(jPanel5);
-        jPanel5.setBounds(0, 0, 0, 0);
-
-        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 110, 50));
-
         getContentPane().add(Container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
 
         pack();
@@ -415,7 +384,6 @@ public class accountDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-<<<<<<< HEAD
         
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -486,10 +454,7 @@ public class accountDetails extends javax.swing.JFrame {
         dbc.updateData(updateQuery);
 
         JOptionPane.showMessageDialog(null, "User details updated successfully!");
-        
-        loginForm lf = new loginForm();
-        lf.setVisible(true);
-        this.dispose();
+
     } else {
         JOptionPane.showMessageDialog(null, "User not found!");
     }
@@ -505,63 +470,6 @@ public class accountDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-=======
-        try {
-    dbConnector dbc = new dbConnector();
-    Session sess = Session.getInstance();
-    
-    String query = "SELECT * FROM tbl_user WHERE user_id = '" + sess.getUserId() + "'";
-    ResultSet rs = dbc.getData(query);
-    
-    if (rs.next()) {
-        // Retrieve user inputs
-        String fname = firstname.getText().trim();
-        String lname = lastname.getText().trim();
-        String em = email.getText().trim();
-        String contact = cn.getText().trim();
-        String userType = ut.getSelectedItem().toString();
-        String username = un.getText().trim();
-
-        // Validation checks
-        if (fname.isEmpty() || lname.isEmpty() || em.isEmpty() || contact.isEmpty() || username.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-            return;
-        }
-        
-        if (!em.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-            JOptionPane.showMessageDialog(null, "Invalid email format!");
-            return;
-        }
-        
-        if (!contact.matches("^\\d{10,15}$")) {
-            JOptionPane.showMessageDialog(null, "Invalid contact number! It must be 10-15 digits long.");
-            return;
-        }
-        
-        // Update query
-        String updateQuery = "UPDATE tbl_user SET user_firstname = '" + fname + "', user_lastname = '" + lname + "', " +
-                             "user_email = '" + em + "', user_contact = '" + contact + "', " +
-                             "user_usertype = '" + userType + "', user_username = '" + username + "' " +
-                             "WHERE user_id = '" + sess.getUserId() + "'";
-        
-        dbc.updateData(updateQuery);
-        JOptionPane.showMessageDialog(null, "User details successfully updated!");
-        
-        loginForm lg = new loginForm();
-        lg.setVisible(true);
-        this.dispose();
-    }
-} catch (SQLException ex) {
-    System.out.println("SQL Error: " + ex);
-}
-
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel4MouseClicked
-
->>>>>>> 96a8f1036c4cda805449da7e2ab8c4712c7703b3
     /**
      * @param args the command line arguments
      */
