@@ -18,8 +18,9 @@ import javax.swing.JOptionPane;
  * @author Karystel
  */
 public class dbConnector {
+
     
-    private Connection connect;
+    public Connection connect;
     
     public dbConnector(){
         try{
@@ -72,4 +73,6 @@ public class dbConnector {
             }
         
         }
-}
+
+    
+    }

@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/config/dbConnector.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/sampleguigym1/loginForm.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/config/Session.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/createUserForm.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/adminDashboard.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/CustomerDashboard.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/usersForm.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/sampleguigym1/registrationform.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/user/userDashboard.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/CustomerForm.java</file>
         </group>
     </open-files>
 </project-private>

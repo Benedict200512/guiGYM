@@ -99,13 +99,24 @@ public class loginForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         showpass = new javax.swing.JCheckBox();
         password = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         Container.setBackground(new java.awt.Color(0, 204, 204));
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Header.setBackground(new java.awt.Color(0, 153, 153));
+        Header.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,6 +144,7 @@ public class loginForm extends javax.swing.JFrame {
         Container.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 110));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -146,6 +158,7 @@ public class loginForm extends javax.swing.JFrame {
         login.setText("LOGIN FORM");
         Container.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 430, -1));
 
+        LOGIN.setBackground(new java.awt.Color(0, 102, 102));
         LOGIN.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         LOGIN.setText("LOGIN");
         LOGIN.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +168,7 @@ public class loginForm extends javax.swing.JFrame {
         });
         Container.add(LOGIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 420, 110, -1));
 
+        Exit.setBackground(new java.awt.Color(0, 102, 102));
         Exit.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Exit.setText("EXIT");
         Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -166,16 +180,17 @@ public class loginForm extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("New User? Click Here to Sign-up!");
+        jLabel4.setText("Forgot Password?");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
         });
-        Container.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 240, 20));
+        Container.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, 160, 40));
 
-        username.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        username.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameActionPerformed(evt);
@@ -192,22 +207,33 @@ public class loginForm extends javax.swing.JFrame {
         Container.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 110, 60));
 
         showpass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        showpass.setText("Show password");
+        showpass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         showpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showpassActionPerformed(evt);
             }
         });
-        Container.add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, 140, -1));
+        Container.add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, 20, 20));
 
-        password.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        password.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
         password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
         Container.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 240, 40));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("New User? Click Here to Sign-up!");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        Container.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, 240, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,8 +258,8 @@ public class loginForm extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
 
-        registrationform rfm = new registrationform();
-        rfm.setVisible(true);
+        forgotPassword fp = new forgotPassword();
+        fp.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -282,6 +308,20 @@ public class loginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        registrationform rfm = new registrationform();
+        rfm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -324,6 +364,7 @@ public class loginForm extends javax.swing.JFrame {
     private javax.swing.JButton LOGIN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

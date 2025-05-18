@@ -6,6 +6,8 @@
 package admin;
 
 import config.Session;
+import java.awt.Color;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import sampleguigym1.loginForm;
 import user.accountDetails;
@@ -22,6 +24,8 @@ public class adminDashboard extends javax.swing.JFrame {
     public adminDashboard() {
         initComponents();
     }
+        Color navcolor = new Color(153,255,252);
+        Color hovercolor = new Color (0,204,204);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,22 +43,56 @@ public class adminDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        acc_name = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        account = new javax.swing.JLabel();
+        p_customer = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        p_add1 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        p_add2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        p_add3 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        p_add = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        p_add4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        p_add8 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        p_add9 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        panel = new javax.swing.JPanel();
+        acc_name = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        p_edit = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        p_add5 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        p_add6 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        p_add7 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        p_add10 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        p_add11 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        p_add12 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        p_add13 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        p_add14 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        p_add15 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        p_add16 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        p_add17 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -67,16 +105,18 @@ public class adminDashboard extends javax.swing.JFrame {
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Header.setBackground(new java.awt.Color(0, 153, 153));
+        Header.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 38)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("ADMIN DASHBOARD");
-        Header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 400, 30));
+        jLabel3.setText("GYM MEMBERSHIP MANAGEMENT SYSTEM");
+        Header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 830, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 30)); // NOI18N
         jButton1.setText("LOG-OUT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +136,9 @@ public class adminDashboard extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -113,41 +153,209 @@ public class adminDashboard extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/images-removebg-preview (1).png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 300, 240));
 
-        acc_name.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        acc_name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        acc_name.setText("ADMIN");
-        acc_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acc_nameActionPerformed(evt);
+        account.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        account.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        account.setText("ACCOUNT");
+        account.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                accountMouseClicked(evt);
             }
         });
-        jPanel2.add(acc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 30));
+        jPanel2.add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 220, -1));
+
+        p_customer.setBackground(new java.awt.Color(153, 255, 252));
+        p_customer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_customerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_customerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_customerMouseExited(evt);
+            }
+        });
+        p_customer.setLayout(null);
+
+        jLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("CUSTOMER");
+        p_customer.add(jLabel14);
+        jLabel14.setBounds(0, 10, 220, 30);
+
+        p_add1.setBackground(new java.awt.Color(153, 255, 252));
+        p_add1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add1MouseExited(evt);
+            }
+        });
+        p_add1.setLayout(null);
+
+        jLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("ADD");
+        p_add1.add(jLabel15);
+        jLabel15.setBounds(80, 10, 60, 30);
+
+        p_customer.add(p_add1);
+        p_add1.setBounds(0, 0, 0, 0);
+
+        p_add2.setBackground(new java.awt.Color(153, 255, 252));
+        p_add2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add2MouseExited(evt);
+            }
+        });
+        p_add2.setLayout(null);
+
+        jLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("ADD");
+        p_add2.add(jLabel16);
+        jLabel16.setBounds(80, 10, 60, 30);
+
+        p_add3.setBackground(new java.awt.Color(153, 255, 252));
+        p_add3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add3MouseExited(evt);
+            }
+        });
+        p_add3.setLayout(null);
+
+        jLabel17.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("ADD");
+        p_add3.add(jLabel17);
+        jLabel17.setBounds(80, 10, 60, 30);
+
+        p_add2.add(p_add3);
+        p_add3.setBounds(0, 0, 0, 0);
+
+        p_customer.add(p_add2);
+        p_add2.setBounds(0, 0, 0, 0);
+
+        jPanel2.add(p_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 220, 50));
+
+        p_add.setBackground(new java.awt.Color(153, 255, 252));
+        p_add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_addMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_addMouseExited(evt);
+            }
+        });
+        p_add.setLayout(null);
+
+        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("COACH");
+        p_add.add(jLabel5);
+        jLabel5.setBounds(0, 10, 220, 30);
+
+        p_add4.setBackground(new java.awt.Color(153, 255, 252));
+        p_add4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add4MouseExited(evt);
+            }
+        });
+        p_add4.setLayout(null);
+
+        jLabel20.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("ADD");
+        p_add4.add(jLabel20);
+        jLabel20.setBounds(80, 10, 60, 30);
+
+        p_add.add(p_add4);
+        p_add4.setBounds(0, 0, 0, 0);
+
+        p_add8.setBackground(new java.awt.Color(153, 255, 252));
+        p_add8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add8MouseExited(evt);
+            }
+        });
+        p_add8.setLayout(null);
+
+        jLabel21.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("ADD");
+        p_add8.add(jLabel21);
+        jLabel21.setBounds(80, 10, 60, 30);
+
+        p_add9.setBackground(new java.awt.Color(153, 255, 252));
+        p_add9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add9MouseExited(evt);
+            }
+        });
+        p_add9.setLayout(null);
+
+        jLabel22.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("ADD");
+        p_add9.add(jLabel22);
+        jLabel22.setBounds(80, 10, 60, 30);
+
+        p_add8.add(p_add9);
+        p_add9.setBounds(0, 0, 0, 0);
+
+        p_add.add(p_add8);
+        p_add8.setBounds(0, 0, 0, 0);
+
+        jPanel2.add(p_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 220, 50));
+
+        panel.setBackground(new java.awt.Color(0, 153, 153));
+        panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        panel.setLayout(null);
+
+        acc_name.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        acc_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        acc_name.setText("ADMIN");
+        panel.add(acc_name);
+        acc_name.setBounds(-2, 6, 220, 20);
+
+        jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 30));
+
+        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 36, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 220, 40));
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 500));
-
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel3MouseClicked(evt);
-            }
-        });
-        jPanel3.setLayout(null);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/852253-200.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-        jPanel3.add(jLabel5);
-        jLabel5.setBounds(0, 40, 170, 80);
-
-        jLabel9.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel9.setText("ACCOUNT");
-        jPanel3.add(jLabel9);
-        jLabel9.setBounds(60, 130, 90, 21);
-
-        Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 200, 180));
 
         jPanel4.setBackground(new java.awt.Color(153, 255, 255));
         jPanel4.setLayout(null);
@@ -161,38 +369,7 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel4.add(jLabel4);
         jLabel4.setBounds(40, 150, 120, 21);
 
-        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 200, 180));
-
-        jPanel5.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel5.setLayout(null);
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/personal-trainer-glyph-icon-illustration-vector-removebg-preview.png"))); // NOI18N
-        jPanel5.add(jLabel8);
-        jLabel8.setBounds(0, 0, 200, 144);
-
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel6.setText("COACH");
-        jPanel5.add(jLabel6);
-        jLabel6.setBounds(69, 151, 60, 21);
-
-        jPanel7.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel7.setLayout(null);
-
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/personal-trainer-glyph-icon-illustration-vector-removebg-preview.png"))); // NOI18N
-        jPanel7.add(jLabel10);
-        jLabel10.setBounds(0, 0, 200, 144);
-
-        jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel7.setText("COACH");
-        jPanel7.add(jLabel7);
-        jLabel7.setBounds(69, 151, 60, 21);
-
-        jPanel5.add(jPanel7);
-        jPanel7.setBounds(0, 0, 0, 0);
-
-        Container.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 200, 180));
+        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 200, 180));
 
         jPanel8.setBackground(new java.awt.Color(153, 255, 255));
         jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,7 +393,253 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel8.add(jLabel12);
         jLabel12.setBounds(80, 130, 50, 21);
 
-        Container.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 200, 180));
+        Container.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 200, 180));
+
+        p_edit.setBackground(new java.awt.Color(153, 255, 252));
+        p_edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_editMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_editMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_editMouseExited(evt);
+            }
+        });
+        p_edit.setLayout(null);
+
+        jLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("EDIT");
+        p_edit.add(jLabel13);
+        jLabel13.setBounds(80, 10, 60, 30);
+
+        p_add5.setBackground(new java.awt.Color(153, 255, 252));
+        p_add5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add5MouseExited(evt);
+            }
+        });
+        p_add5.setLayout(null);
+
+        jLabel9.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("ADD");
+        p_add5.add(jLabel9);
+        jLabel9.setBounds(80, 10, 60, 30);
+
+        p_edit.add(p_add5);
+        p_add5.setBounds(0, 0, 0, 0);
+
+        p_add6.setBackground(new java.awt.Color(153, 255, 252));
+        p_add6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add6MouseExited(evt);
+            }
+        });
+        p_add6.setLayout(null);
+
+        jLabel18.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("ADD");
+        p_add6.add(jLabel18);
+        jLabel18.setBounds(80, 10, 60, 30);
+
+        p_add7.setBackground(new java.awt.Color(153, 255, 252));
+        p_add7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add7MouseExited(evt);
+            }
+        });
+        p_add7.setLayout(null);
+
+        jLabel19.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("ADD");
+        p_add7.add(jLabel19);
+        jLabel19.setBounds(80, 10, 60, 30);
+
+        p_add6.add(p_add7);
+        p_add7.setBounds(0, 0, 0, 0);
+
+        p_edit.add(p_add6);
+        p_add6.setBounds(0, 0, 0, 0);
+
+        Container.add(p_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 220, 50));
+
+        p_add10.setBackground(new java.awt.Color(153, 255, 252));
+        p_add10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_add10MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add10MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add10MouseExited(evt);
+            }
+        });
+        p_add10.setLayout(null);
+
+        jLabel23.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("ADD");
+        p_add10.add(jLabel23);
+        jLabel23.setBounds(80, 10, 60, 30);
+
+        p_add11.setBackground(new java.awt.Color(153, 255, 252));
+        p_add11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add11MouseExited(evt);
+            }
+        });
+        p_add11.setLayout(null);
+
+        jLabel24.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("ADD");
+        p_add11.add(jLabel24);
+        jLabel24.setBounds(80, 10, 60, 30);
+
+        p_add10.add(p_add11);
+        p_add11.setBounds(0, 0, 0, 0);
+
+        p_add12.setBackground(new java.awt.Color(153, 255, 252));
+        p_add12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add12MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add12MouseExited(evt);
+            }
+        });
+        p_add12.setLayout(null);
+
+        jLabel25.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("ADD");
+        p_add12.add(jLabel25);
+        jLabel25.setBounds(80, 10, 60, 30);
+
+        p_add13.setBackground(new java.awt.Color(153, 255, 252));
+        p_add13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add13MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add13MouseExited(evt);
+            }
+        });
+        p_add13.setLayout(null);
+
+        jLabel26.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("ADD");
+        p_add13.add(jLabel26);
+        jLabel26.setBounds(80, 10, 60, 30);
+
+        p_add12.add(p_add13);
+        p_add13.setBounds(0, 0, 0, 0);
+
+        p_add10.add(p_add12);
+        p_add12.setBounds(0, 0, 0, 0);
+
+        Container.add(p_add10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 220, 50));
+
+        p_add14.setBackground(new java.awt.Color(153, 255, 252));
+        p_add14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_add14MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add14MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add14MouseExited(evt);
+            }
+        });
+        p_add14.setLayout(null);
+
+        jLabel27.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel27.setText("ADD");
+        p_add14.add(jLabel27);
+        jLabel27.setBounds(80, 10, 60, 30);
+
+        p_add15.setBackground(new java.awt.Color(153, 255, 252));
+        p_add15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add15MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add15MouseExited(evt);
+            }
+        });
+        p_add15.setLayout(null);
+
+        jLabel28.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("ADD");
+        p_add15.add(jLabel28);
+        jLabel28.setBounds(80, 10, 60, 30);
+
+        p_add14.add(p_add15);
+        p_add15.setBounds(0, 0, 0, 0);
+
+        p_add16.setBackground(new java.awt.Color(153, 255, 252));
+        p_add16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add16MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add16MouseExited(evt);
+            }
+        });
+        p_add16.setLayout(null);
+
+        jLabel29.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("ADD");
+        p_add16.add(jLabel29);
+        jLabel29.setBounds(80, 10, 60, 30);
+
+        p_add17.setBackground(new java.awt.Color(153, 255, 252));
+        p_add17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                p_add17MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                p_add17MouseExited(evt);
+            }
+        });
+        p_add17.setLayout(null);
+
+        jLabel30.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("ADD");
+        p_add17.add(jLabel30);
+        jLabel30.setBounds(80, 10, 60, 30);
+
+        p_add16.add(p_add17);
+        p_add17.setBounds(0, 0, 0, 0);
+
+        p_add14.add(p_add16);
+        p_add16.setBounds(0, 0, 0, 0);
+
+        Container.add(p_add14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 220, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,22 +681,6 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         this.dispose();
     }    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void acc_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acc_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_acc_nameActionPerformed
-
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        accountDetails accd = new accountDetails();
-        accd.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jPanel3MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        accountDetails accd = new accountDetails();
-        accd.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jLabel5MouseClicked
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session sess = Session.getInstance();
         if(sess.getUserId()== 0){
@@ -287,12 +694,210 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }//GEN-LAST:event_formWindowActivated
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        // TODO add your handling code here:
+        usersForm usf = new usersForm();
+        usf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        // TODO add your handling code here:
+        usersForm usf = new usersForm();
+        usf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void p_add1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add1MouseEntered
+
+    }//GEN-LAST:event_p_add1MouseEntered
+
+    private void p_add1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add1MouseExited
+
+    }//GEN-LAST:event_p_add1MouseExited
+
+    private void p_add3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add3MouseEntered
+
+    private void p_add3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add3MouseExited
+
+    private void p_add2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add2MouseEntered
+
+    private void p_add2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add2MouseExited
+
+    private void p_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseClicked
+       CustomerDashboard customer = new CustomerDashboard();
+        customer.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_p_customerMouseClicked
+
+    private void p_customerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseEntered
+        p_customer.setBackground(hovercolor);
+    }//GEN-LAST:event_p_customerMouseEntered
+
+    private void p_customerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseExited
+        p_customer.setBackground(navcolor);
+    }//GEN-LAST:event_p_customerMouseExited
+
+    private void accountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMouseClicked
+      accountDetails accd = new accountDetails();
+        accd.setVisible(true);
+        this.dispose();        this.dispose();    }//GEN-LAST:event_accountMouseClicked
+
+    private void p_add5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add5MouseEntered
+
+    private void p_add5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add5MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add5MouseExited
+
+    private void p_add7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add7MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add7MouseEntered
+
+    private void p_add7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add7MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add7MouseExited
+
+    private void p_add6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add6MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add6MouseEntered
+
+    private void p_add6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add6MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add6MouseExited
+
+    private void p_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_editMouseClicked
+       
+
+    }//GEN-LAST:event_p_editMouseClicked
+
+    private void p_editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_editMouseEntered
+      
+    }//GEN-LAST:event_p_editMouseEntered
+
+    private void p_editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_editMouseExited
+        
+    }//GEN-LAST:event_p_editMouseExited
+
+    private void p_add4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add4MouseEntered
+
+    }//GEN-LAST:event_p_add4MouseEntered
+
+    private void p_add4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add4MouseExited
+
+    }//GEN-LAST:event_p_add4MouseExited
+
+    private void p_add9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add9MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add9MouseEntered
+
+    private void p_add9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add9MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add9MouseExited
+
+    private void p_add8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add8MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add8MouseEntered
+
+    private void p_add8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add8MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add8MouseExited
+
+    private void p_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseClicked
+        CoachDashboard coach = new CoachDashboard();
+        coach.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_p_addMouseClicked
+
+    private void p_addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseEntered
+        p_add.setBackground(hovercolor);
+    }//GEN-LAST:event_p_addMouseEntered
+
+    private void p_addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseExited
+        p_add.setBackground(navcolor);
+    }//GEN-LAST:event_p_addMouseExited
+
+    private void p_add11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add11MouseEntered
+
+    }//GEN-LAST:event_p_add11MouseEntered
+
+    private void p_add11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add11MouseExited
+
+    }//GEN-LAST:event_p_add11MouseExited
+
+    private void p_add13MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add13MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add13MouseEntered
+
+    private void p_add13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add13MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add13MouseExited
+
+    private void p_add12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add12MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add12MouseEntered
+
+    private void p_add12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add12MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add12MouseExited
+
+    private void p_add10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add10MouseClicked
+        createUserForm usf = new createUserForm();
+        usf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_p_add10MouseClicked
+
+    private void p_add10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add10MouseEntered
+        p_add.setBackground(hovercolor);
+    }//GEN-LAST:event_p_add10MouseEntered
+
+    private void p_add10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add10MouseExited
+        p_add.setBackground(navcolor);
+    }//GEN-LAST:event_p_add10MouseExited
+
+    private void p_add15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add15MouseEntered
+
+    }//GEN-LAST:event_p_add15MouseEntered
+
+    private void p_add15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add15MouseExited
+
+    }//GEN-LAST:event_p_add15MouseExited
+
+    private void p_add17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add17MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add17MouseEntered
+
+    private void p_add17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add17MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add17MouseExited
+
+    private void p_add16MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add16MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add16MouseEntered
+
+    private void p_add16MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add16MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p_add16MouseExited
+
+    private void p_add14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add14MouseClicked
+        createUserForm usf = new createUserForm();
+        usf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_p_add14MouseClicked
+
+    private void p_add14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add14MouseEntered
+        p_add.setBackground(hovercolor);
+    }//GEN-LAST:event_p_add14MouseEntered
+
+    private void p_add14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add14MouseExited
+        p_add.setBackground(navcolor);
+    }//GEN-LAST:event_p_add14MouseExited
 
     /**
      * @param args the command line arguments
@@ -332,26 +937,63 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Container;
     private javax.swing.JPanel Header;
-    private javax.swing.JTextField acc_name;
+    private javax.swing.JLabel acc_name;
+    private javax.swing.JLabel account;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel p_add;
+    private javax.swing.JPanel p_add1;
+    private javax.swing.JPanel p_add10;
+    private javax.swing.JPanel p_add11;
+    private javax.swing.JPanel p_add12;
+    private javax.swing.JPanel p_add13;
+    private javax.swing.JPanel p_add14;
+    private javax.swing.JPanel p_add15;
+    private javax.swing.JPanel p_add16;
+    private javax.swing.JPanel p_add17;
+    private javax.swing.JPanel p_add2;
+    private javax.swing.JPanel p_add3;
+    private javax.swing.JPanel p_add4;
+    private javax.swing.JPanel p_add5;
+    private javax.swing.JPanel p_add6;
+    private javax.swing.JPanel p_add7;
+    private javax.swing.JPanel p_add8;
+    private javax.swing.JPanel p_add9;
+    private javax.swing.JPanel p_customer;
+    private javax.swing.JPanel p_edit;
+    private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
+
+    public void acc_nameMouseClicked(MouseEvent evt) {
+    }
 }
