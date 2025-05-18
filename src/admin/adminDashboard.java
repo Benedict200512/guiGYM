@@ -700,7 +700,11 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+<<<<<<< HEAD
         usersForm usf = new usersForm();
+=======
+        usersForm usf = new usersForm ();
+>>>>>>> 96a8f1036c4cda805449da7e2ab8c4712c7703b3
         usf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel8MouseClicked
