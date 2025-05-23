@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/sampleguigym1/loginForm.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/config/Session.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/createWorkout.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/createMembership.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/coachForm.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/createUserForm.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/MEMBERSHIP.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/adminDashboard.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/CustomerDashboard.java</file>
             <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/usersForm.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/user/accountDetails.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/user/userDashboard.java</file>
-            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/CustomerForm.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/createCoach.java</file>
+            <file>file:/C:/Users/Karystel/Documents/NetBeansProjects/sampleGuiGYM1/src/admin/workoutForm.java</file>
         </group>
     </open-files>
 </project-private>

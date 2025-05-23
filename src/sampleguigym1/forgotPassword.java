@@ -279,50 +279,50 @@ public class forgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_backMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        String userEmail = email.getText();
-        String answer = ans.getText();
-        String newPassword = np.getText();
+       String userEmail = email.getText();
+       String answer = ans.getText();
+       String newPassword = np.getText();
 
-        if (userEmail.isEmpty() || sq.getText().isEmpty() || answer.isEmpty() || newPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled.");
-            return;
+if (userEmail.isEmpty() || sq.getText().isEmpty() || answer.isEmpty() || newPassword.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "All fields must be filled.");
+    return;
+}
+
+if (newPassword.length() < 8) {
+    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
+    return;
+}
+
+dbConnector dbc = new dbConnector();
+
+try {
+    ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE user_email = '" + userEmail + "'");
+    if (rs.next()) {
+        String correctAnswer = rs.getString("user_security_answer");
+        String hashedInputAnswer = passwordHasher.hashPassword(answer);
+
+        if (hashedInputAnswer.equals(correctAnswer)) {
+            String hashedPassword = passwordHasher.hashPassword(newPassword);
+
+            dbc.updateData("UPDATE tbl_user SET user_password = '" + hashedPassword + "' WHERE user_email = '" + userEmail + "'");
+
+            email.setText("");
+            sq.setText("");
+            ans.setText("");
+            np.setText("");
+
+            loginForm lf = new loginForm();
+            lf.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect security answer.");
         }
-
-        if (newPassword.length() < 8) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
-            return;
-        }
-
-        dbConnector dbc = new dbConnector();
-
-        try {
-            ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE user_email = '" + userEmail + "'");
-            if (rs.next()) {
-                String correctAnswer = rs.getString("user_security_answer");
-
-                if (answer.equalsIgnoreCase(correctAnswer)) {
-                    String hashedPassword = passwordHasher.hashPassword(newPassword);
-             
-                    dbc.updateData("UPDATE tbl_user SET user_password = '" + hashedPassword + "' WHERE user_email = '" + userEmail + "'");
-
-                    email.setText("");
-                    sq.setText("");
-                    ans.setText("");
-                    np.setText("");
-                       
-                    loginForm lf = new loginForm();
-                    lf.setVisible(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect security answer.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Please search for a valid email first.");
-            }
-        } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
-       
+    } else {
+        JOptionPane.showMessageDialog(null, "Please search for a valid email first.");
     }
+} catch (Exception ex) {
+    System.out.println("Error: " + ex.getMessage());
+}
     }//GEN-LAST:event_saveMouseClicked
 
     /**

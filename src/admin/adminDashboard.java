@@ -44,14 +44,6 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         account = new javax.swing.JLabel();
-        p_customer = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        p_add1 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        p_add2 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        p_add3 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         p_add = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         p_add4 = new javax.swing.JPanel();
@@ -63,10 +55,10 @@ public class adminDashboard extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         acc_name = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        membership = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        user = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         p_edit = new javax.swing.JPanel();
@@ -93,6 +85,14 @@ public class adminDashboard extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         p_add17 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
+        logs = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        workout = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        coach = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -163,88 +163,6 @@ public class adminDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 220, -1));
 
-        p_customer.setBackground(new java.awt.Color(153, 255, 252));
-        p_customer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                p_customerMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_customerMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_customerMouseExited(evt);
-            }
-        });
-        p_customer.setLayout(null);
-
-        jLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("CUSTOMER");
-        p_customer.add(jLabel14);
-        jLabel14.setBounds(0, 10, 220, 30);
-
-        p_add1.setBackground(new java.awt.Color(153, 255, 252));
-        p_add1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add1MouseExited(evt);
-            }
-        });
-        p_add1.setLayout(null);
-
-        jLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("ADD");
-        p_add1.add(jLabel15);
-        jLabel15.setBounds(80, 10, 60, 30);
-
-        p_customer.add(p_add1);
-        p_add1.setBounds(0, 0, 0, 0);
-
-        p_add2.setBackground(new java.awt.Color(153, 255, 252));
-        p_add2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add2MouseExited(evt);
-            }
-        });
-        p_add2.setLayout(null);
-
-        jLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("ADD");
-        p_add2.add(jLabel16);
-        jLabel16.setBounds(80, 10, 60, 30);
-
-        p_add3.setBackground(new java.awt.Color(153, 255, 252));
-        p_add3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add3MouseExited(evt);
-            }
-        });
-        p_add3.setLayout(null);
-
-        jLabel17.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("ADD");
-        p_add3.add(jLabel17);
-        jLabel17.setBounds(80, 10, 60, 30);
-
-        p_add2.add(p_add3);
-        p_add3.setBounds(0, 0, 0, 0);
-
-        p_customer.add(p_add2);
-        p_add2.setBounds(0, 0, 0, 0);
-
-        jPanel2.add(p_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 220, 50));
-
         p_add.setBackground(new java.awt.Color(153, 255, 252));
         p_add.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -261,7 +179,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("COACH");
+        jLabel5.setText("MEMBERSHIP");
         p_add.add(jLabel5);
         jLabel5.setBounds(0, 10, 220, 30);
 
@@ -357,27 +275,44 @@ public class adminDashboard extends javax.swing.JFrame {
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 500));
 
-        jPanel4.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel4.setLayout(null);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4773624-200-removebg-preview.png"))); // NOI18N
-        jPanel4.add(jLabel2);
-        jLabel2.setBounds(0, 10, 200, 140);
-
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
-        jLabel4.setText("MEMBERSHIP");
-        jPanel4.add(jLabel4);
-        jLabel4.setBounds(40, 150, 120, 21);
-
-        Container.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 200, 180));
-
-        jPanel8.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        membership.setBackground(new java.awt.Color(153, 255, 255));
+        membership.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
+                membershipMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                membershipMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                membershipMouseExited(evt);
             }
         });
-        jPanel8.setLayout(null);
+        membership.setLayout(null);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/4773624-200-removebg-preview.png"))); // NOI18N
+        membership.add(jLabel2);
+        jLabel2.setBounds(0, 10, 200, 140);
+
+        jLabel14.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel14.setText("MEMBERSHIP");
+        membership.add(jLabel14);
+        jLabel14.setBounds(40, 150, 120, 21);
+
+        Container.add(membership, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 200, 180));
+
+        user.setBackground(new java.awt.Color(153, 255, 255));
+        user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                userMouseExited(evt);
+            }
+        });
+        user.setLayout(null);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/852253-200.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -385,15 +320,15 @@ public class adminDashboard extends javax.swing.JFrame {
                 jLabel11MouseClicked(evt);
             }
         });
-        jPanel8.add(jLabel11);
+        user.add(jLabel11);
         jLabel11.setBounds(0, 40, 170, 80);
 
         jLabel12.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         jLabel12.setText("USER");
-        jPanel8.add(jLabel12);
+        user.add(jLabel12);
         jLabel12.setBounds(80, 130, 50, 21);
 
-        Container.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 200, 180));
+        Container.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 200, 180));
 
         p_edit.setBackground(new java.awt.Color(153, 255, 252));
         p_edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -641,6 +576,86 @@ public class adminDashboard extends javax.swing.JFrame {
 
         Container.add(p_add14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 220, 50));
 
+        logs.setBackground(new java.awt.Color(153, 255, 255));
+        logs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logsMouseExited(evt);
+            }
+        });
+        logs.setLayout(null);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3428334-200.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
+        logs.add(jLabel6);
+        jLabel6.setBounds(0, 0, 200, 180);
+
+        Container.add(logs, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 200, 180));
+
+        workout.setBackground(new java.awt.Color(153, 255, 255));
+        workout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                workoutMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                workoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                workoutMouseExited(evt);
+            }
+        });
+        workout.setLayout(null);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gym-icon-stock-illustration-free-vector-removebg-preview.png"))); // NOI18N
+        workout.add(jLabel8);
+        jLabel8.setBounds(0, 10, 200, 130);
+
+        jLabel4.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText(" WORKOUT");
+        workout.add(jLabel4);
+        jLabel4.setBounds(0, 130, 200, 21);
+
+        Container.add(workout, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 200, 180));
+
+        coach.setBackground(new java.awt.Color(153, 255, 255));
+        coach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                coachMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                coachMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                coachMouseExited(evt);
+            }
+        });
+        coach.setLayout(null);
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/personal-trainer-glyph-icon-illustration-vector-removebg-preview.png"))); // NOI18N
+        coach.add(jLabel10);
+        jLabel10.setBounds(0, 0, 180, 150);
+
+        jLabel7.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("COACH");
+        coach.add(jLabel7);
+        jLabel7.setBounds(0, 150, 200, 30);
+
+        Container.add(coach, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 200, 180));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -699,50 +714,12 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         this.dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+    private void userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseClicked
 
         usersForm usf = new usersForm();
         usf.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    private void p_add1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add1MouseEntered
-
-    }//GEN-LAST:event_p_add1MouseEntered
-
-    private void p_add1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add1MouseExited
-
-    }//GEN-LAST:event_p_add1MouseExited
-
-    private void p_add3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add3MouseEntered
-
-    private void p_add3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add3MouseExited
-
-    private void p_add2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add2MouseEntered
-
-    private void p_add2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add2MouseExited
-
-    private void p_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseClicked
-       CustomerDashboard customer = new CustomerDashboard();
-        customer.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_p_customerMouseClicked
-
-    private void p_customerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseEntered
-        p_customer.setBackground(hovercolor);
-    }//GEN-LAST:event_p_customerMouseEntered
-
-    private void p_customerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_customerMouseExited
-        p_customer.setBackground(navcolor);
-    }//GEN-LAST:event_p_customerMouseExited
+    }//GEN-LAST:event_userMouseClicked
 
     private void accountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accountMouseClicked
       accountDetails accd = new accountDetails();
@@ -811,8 +788,8 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }//GEN-LAST:event_p_add8MouseExited
 
     private void p_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseClicked
-        CoachDashboard coach = new CoachDashboard();
-        coach.setVisible(true);
+        MEMBERSHIP MB = new MEMBERSHIP();
+        MB.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_p_addMouseClicked
 
@@ -900,6 +877,79 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         p_add.setBackground(navcolor);
     }//GEN-LAST:event_p_add14MouseExited
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+       logsForm lg = new logsForm();
+       lg.setVisible(true);
+       this.dispose();
+       
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void userMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseEntered
+        user.setBackground(hovercolor);
+    }//GEN-LAST:event_userMouseEntered
+
+    private void userMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseExited
+        user.setBackground(navcolor);
+    }//GEN-LAST:event_userMouseExited
+
+    private void membershipMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_membershipMouseEntered
+       membership.setBackground(hovercolor);
+    }//GEN-LAST:event_membershipMouseEntered
+
+    private void membershipMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_membershipMouseExited
+        membership.setBackground(navcolor);
+    }//GEN-LAST:event_membershipMouseExited
+
+    private void logsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logsMouseEntered
+        logs.setBackground(hovercolor);
+    }//GEN-LAST:event_logsMouseEntered
+
+    private void logsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logsMouseExited
+        logs.setBackground(navcolor);
+    }//GEN-LAST:event_logsMouseExited
+
+    private void workoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workoutMouseEntered
+        workout.setBackground(hovercolor);
+    }//GEN-LAST:event_workoutMouseEntered
+
+    private void workoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workoutMouseExited
+        workout.setBackground(navcolor);
+    }//GEN-LAST:event_workoutMouseExited
+
+    private void workoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workoutMouseClicked
+        workoutForm wf = new workoutForm();
+        wf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_workoutMouseClicked
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+       logs.setBackground(hovercolor);
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        logs.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void coachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coachMouseClicked
+        coachForm coach = new coachForm();
+        coach.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_coachMouseClicked
+
+    private void coachMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coachMouseEntered
+        coach.setBackground(hovercolor);
+    }//GEN-LAST:event_coachMouseEntered
+
+    private void coachMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_coachMouseExited
+        coach.setBackground(navcolor);
+    }//GEN-LAST:event_coachMouseExited
+
+    private void membershipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_membershipMouseClicked
+        membershipForm mf = new membershipForm();
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_membershipMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -940,15 +990,14 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JPanel Header;
     private javax.swing.JLabel acc_name;
     private javax.swing.JLabel account;
+    private javax.swing.JPanel coach;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -966,14 +1015,16 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel logs;
+    private javax.swing.JPanel membership;
     private javax.swing.JPanel p_add;
-    private javax.swing.JPanel p_add1;
     private javax.swing.JPanel p_add10;
     private javax.swing.JPanel p_add11;
     private javax.swing.JPanel p_add12;
@@ -982,17 +1033,16 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JPanel p_add15;
     private javax.swing.JPanel p_add16;
     private javax.swing.JPanel p_add17;
-    private javax.swing.JPanel p_add2;
-    private javax.swing.JPanel p_add3;
     private javax.swing.JPanel p_add4;
     private javax.swing.JPanel p_add5;
     private javax.swing.JPanel p_add6;
     private javax.swing.JPanel p_add7;
     private javax.swing.JPanel p_add8;
     private javax.swing.JPanel p_add9;
-    private javax.swing.JPanel p_customer;
     private javax.swing.JPanel p_edit;
     private javax.swing.JPanel panel;
+    private javax.swing.JPanel user;
+    private javax.swing.JPanel workout;
     // End of variables declaration//GEN-END:variables
 
     public void acc_nameMouseClicked(MouseEvent evt) {

@@ -30,6 +30,9 @@ public class dbConnector {
                     
         }
     }
+    public Connection getConnection() {
+        return connect;
+    }
      
     //Function to retrieve data
         public ResultSet getData(String sql) throws SQLException{

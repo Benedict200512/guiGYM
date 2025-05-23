@@ -5,6 +5,8 @@
  */
 package admin;
 
+import config.ActivityLogger;
+import config.Session;
 import config.dbConnector;
 import config.passwordHasher;
 import java.awt.Image;
@@ -16,8 +18,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -750,62 +757,110 @@ public class createUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_uidActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty()
+        || cn.getText().isEmpty() || un.getText().isEmpty() || ans.getText().isEmpty()) {
 
-    if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty()
-        || cn.getText().isEmpty() || pw.getText().isEmpty() || un.getText().isEmpty() || ans.getText().isEmpty()) { 
-        JOptionPane.showMessageDialog(null, "All fields are required!");
-    } else if (!email.getText().endsWith("@gmail.com")) {
-        JOptionPane.showMessageDialog(null, "Invalid email format.");
-        email.setText(""); 
-    } else if (!isValidContactNumber(cn.getText())) {
-        JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
-        cn.setText("");
-    } else if (pw.getText().length() < 8) {
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+
+} else if (!email.getText().endsWith("@gmail.com")) {
+
+    JOptionPane.showMessageDialog(null, "Invalid email format.");
+    email.setText("");
+
+} else if (!isValidContactNumber(cn.getText())) {
+
+    JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
+    cn.setText("");
+
+} else if (pw.getText().length() < 8) {
+
     JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
     pw.setText("");
-    } else if (duplicateCheck()) {
+
+} else if (duplicateCheck()) {
+
     JOptionPane.showMessageDialog(null, "Duplicate record exists!");
-    } else {
+
+} else {
     dbConnector dbc = new dbConnector();
     String hashedPassword = "";
+    String hashedAnswer = "";
 
     try {
-      
         hashedPassword = passwordHasher.hashPassword(pw.getText());
+        hashedAnswer = passwordHasher.hashPassword(ans.getText());
     } catch (NoSuchAlgorithmException ex) {
-        JOptionPane.showMessageDialog(null, "Error hashing password: " + ex.getMessage());
+        JOptionPane.showMessageDialog(null, "Error hashing credentials: " + ex.getMessage());
         return;
     }
 
-    String query = "INSERT INTO tbl_user (user_firstname, user_lastname, user_email, user_contact, "
-            + "user_username, user_usertype, user_password, user_status, user_security_question, user_security_answer, user_image) VALUES ('"
-            + firstname.getText() + "','" + lastname.getText() + "','" + email.getText() + "','"
-            + cn.getText() + "','" + un.getText() + "','" + ut.getSelectedItem().toString() + "','"
-            + hashedPassword + "','" + us.getSelectedItem().toString() + "','" + sq.getSelectedItem().toString() + "','" 
-            + ans.getText() + "','" + destination + "')";
+    try {
+        String sql = "INSERT INTO tbl_user (user_firstname, user_lastname, user_email, user_contact, user_username, user_usertype, user_password, user_status, user_security_question, user_security_answer, user_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = dbc.connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-    if (dbc.insertData(query)) {
-        try {
-            Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+        pst.setString(1, firstname.getText());
+        pst.setString(2, lastname.getText());
+        pst.setString(3, email.getText());
+        pst.setString(4, cn.getText());
+        pst.setString(5, un.getText());
+        pst.setString(6, ut.getSelectedItem().toString());
+        pst.setString(7, hashedPassword);
+        pst.setString(8, us.getSelectedItem().toString());
+        pst.setString(9, sq.getSelectedItem().toString());
+        pst.setString(10, hashedAnswer);
+        pst.setString(11, destination);
+
+        int affectedRows = pst.executeUpdate();
+
+        if (affectedRows > 0) {
+            ResultSet generatedKeys = pst.getGeneratedKeys();
+            int generatedId = -1;
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getInt(1);
+            }
+
+           
+            if (selectedFile != null) {
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+
+            if (currentUserId > 0) {
+                String logAction = "Created User Record with ID No. " + generatedId;
+                String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, ?)";
+                PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+                logPst.setInt(1, currentUserId);
+                logPst.setString(2, logAction);
+                logPst.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                logPst.executeUpdate();
+                logPst.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid session user ID. Logging skipped.");
+            }
+
             JOptionPane.showMessageDialog(null, "Registration Success!");
 
             usersForm usf = new usersForm();
             usf.setVisible(true);
             this.dispose();
 
-        } catch (IOException ex) {
-            System.out.println("Insert Image Error: " + ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to insert user.");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Connection Error!");
-    }
-   }
 
+    } catch (SQLException | IOException ex) {
+        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
     }
-    private boolean isValidContactNumber(String contact) {
+}
+    }
+
+
+private boolean isValidContactNumber(String contact) {
     return contact.matches("\\d{11}");
 
- 
     }//GEN-LAST:event_addActionPerformed
 
     private void firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnameActionPerformed
@@ -823,46 +878,104 @@ public class createUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-         if (firstname.getText().isEmpty() ||lastname.getText().isEmpty() || email.getText().isEmpty() || cn.getText().isEmpty() || pw.getText().isEmpty() || un.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-        } else if (!email.getText().endsWith("@gmail.com")) {
-            JOptionPane.showMessageDialog(null, "Invalid email format..");
-            email.setText("");
-        } else if (!isValidContactNumber(cn.getText())) {
-            JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
-            cn.setText("");
-        } else if (updateCheck()) {        
-            System.out.println("Duplicate Exist!");
-        } else {
-        dbConnector dbc = new dbConnector();
-       dbc.updateData("UPDATE tbl_user SET user_firstname = '" + firstname.getText() + "',"
-        + "user_lastname = '" + lastname.getText() + "',"
-        + "user_email = '" + email.getText() + "',"
-        + "user_contact = '" + cn.getText() + "',"
-        + "user_username = '" + un.getText() + "',"
-        + "user_password = '" + pw.getText() + "',"
-        + "user_usertype = '" + ut.getSelectedItem().toString() + "',"
-        + "user_status = '" + us.getSelectedItem().toString() + "',"
-        + "user_security_question = '" + sq.getSelectedItem().toString() + "',"
-        + "user_security_answer = '" + ans.getText() + "',"
-        + "user_image = '" + destination + "' "
-        + "WHERE user_id = '" + uid.getText() + "'");
 
-        
-            if(destination.isEmpty()){
+    if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty()
+            || cn.getText().isEmpty() || pw.getText().isEmpty() || un.getText().isEmpty()) {
+
+        JOptionPane.showMessageDialog(null, "All fields are required!");
+        return;
+
+    } else if (!email.getText().endsWith("@gmail.com")) {
+        JOptionPane.showMessageDialog(null, "Invalid email format.");
+        email.setText("");
+        return;
+
+    } else if (!isValidContactNumber(cn.getText())) {
+        JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
+        cn.setText("");
+        return;
+
+    } else if (updateCheck()) {
+        JOptionPane.showMessageDialog(null, "Duplicate record exists!");
+        return;
+    }
+
+    dbConnector dbc = new dbConnector();
+    String hashedPassword = "";
+    String hashedAnswer = "";
+
+    try {
+        hashedPassword = passwordHasher.hashPassword(pw.getText());
+        hashedAnswer = passwordHasher.hashPassword(ans.getText());
+    } catch (NoSuchAlgorithmException ex) {
+        JOptionPane.showMessageDialog(null, "Error hashing credentials: " + ex.getMessage());
+        return;
+    }
+
+    try {
+        String updateSQL = "UPDATE tbl_user SET user_firstname = ?, user_lastname = ?, user_email = ?, "
+                + "user_contact = ?, user_username = ?, user_password = ?, user_usertype = ?, "
+                + "user_status = ?, user_security_question = ?, user_security_answer = ?, user_image = ? "
+                + "WHERE user_id = ?";
+
+        PreparedStatement pst = dbc.connect.prepareStatement(updateSQL);
+        pst.setString(1, firstname.getText());
+        pst.setString(2, lastname.getText());
+        pst.setString(3, email.getText());
+        pst.setString(4, cn.getText());
+        pst.setString(5, un.getText());
+        pst.setString(6, hashedPassword);
+        pst.setString(7, ut.getSelectedItem().toString());
+        pst.setString(8, us.getSelectedItem().toString());
+        pst.setString(9, sq.getSelectedItem().toString());
+        pst.setString(10, hashedAnswer);
+        pst.setString(11, destination);
+        pst.setInt(12, Integer.parseInt(uid.getText()));
+
+        int rowsAffected = pst.executeUpdate();
+        pst.close();
+
+        if (rowsAffected > 0) {
+           
+            if (destination.isEmpty()) {
                 File existingFile = new File(oldpath);
-                if(existingFile.exists()){
+                if (existingFile.exists()) {
                     existingFile.delete();
                 }
-            }else{
-                if(!(oldpath.equals(path))){
-                    imageUpdater(oldpath, path);
-                }
+            } else if (!oldpath.equals(path)) {
+                imageUpdater(oldpath, path);
             }
+
+           
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+            if (currentUserId > 0) {
+                String action = "Updated user with ID No. " + uid.getText();
+                String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, ?)";
+                PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+                logPst.setInt(1, currentUserId);
+                logPst.setString(2, action);
+                logPst.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                logPst.executeUpdate();
+                logPst.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid session user ID. Logging skipped.");
+            }
+
+            JOptionPane.showMessageDialog(null, "Update Success!");
+
             usersForm usf = new usersForm();
             usf.setVisible(true);
             this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No user record was updated.");
         }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
+
+    }
 
     }//GEN-LAST:event_updateActionPerformed
 

@@ -212,6 +212,7 @@ public class usersForm extends javax.swing.JFrame {
         usersTable.setBackground(new java.awt.Color(0, 102, 102));
         usersTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         usersTable.setFont(new java.awt.Font("Agency FB", 0, 15)); // NOI18N
+        usersTable.setForeground(new java.awt.Color(255, 255, 255));
         usersTable.setGridColor(new java.awt.Color(0, 102, 102));
         jScrollPane1.setViewportView(usersTable);
 
@@ -293,6 +294,9 @@ public class usersForm extends javax.swing.JFrame {
         refresh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         refresh.setForeground(new java.awt.Color(0, 153, 153));
         refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 refreshMouseEntered(evt);
             }
@@ -452,41 +456,57 @@ public class usersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseExited
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        int selectedRow = usersTable.getSelectedRow();
+       int selectedRow = usersTable.getSelectedRow();
 
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a User to delete.");
-            return;
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a User to delete.");
+    return;
+}
+
+int userId = (int) usersTable.getValueAt(selectedRow, 0);
+int confirm = JOptionPane.showConfirmDialog(
+    this,
+    "Are you sure you want to delete User with ID: " + userId + "?",
+    "Confirm Delete",
+    JOptionPane.YES_NO_OPTION
+);
+
+if (confirm == JOptionPane.YES_OPTION) {
+    try {
+        dbConnector dbc = new dbConnector();
+
+        
+        String deleteQuery = "DELETE FROM tbl_user WHERE user_id = ?";
+        PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
+        ps.setInt(1, userId);
+        int rowsAffected = ps.executeUpdate();
+        ps.close();
+
+        if (rowsAffected > 0) {
+            
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+
+            String logAction = "Deleted User with ID: " + userId;
+            String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+            logPst.setInt(1, currentUserId);
+            logPst.setString(2, logAction);
+            logPst.executeUpdate();
+            logPst.close();
+
+            JOptionPane.showMessageDialog(this, "User ID " + userId + " deleted successfully.");
+            ((DefaultTableModel) usersTable.getModel()).removeRow(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to delete user.");
         }
-        int userId = (int) usersTable.getValueAt(selectedRow, 0);
-        int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete User with ID: " + userId + "?",
-            "Confirm Delete",
-            JOptionPane.YES_NO_OPTION
-        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
-            try {
-                dbConnector dbc = new dbConnector();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
 
-                String deleteQuery = "DELETE FROM tbl_user WHERE user_id = ?";
-                PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
-                ps.setInt(1, userId);
-                int rowsAffected = ps.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "User ID " + userId + " Deleted successfully.");
-                    ((DefaultTableModel) usersTable.getModel()).removeRow(selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete coach.");
-                }
-
-                ps.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
-            }
-        }
 
     }//GEN-LAST:event_deleteMouseClicked
 
@@ -618,6 +638,18 @@ public class usersForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_editMouseClicked
 
+    private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
+                                    
+    DefaultTableModel model = (DefaultTableModel) usersTable.getModel();
+    model.setRowCount(0);
+
+   
+
+    JOptionPane.showMessageDialog(null, "Form has been refreshed.");
+
+
+    }//GEN-LAST:event_refreshMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -682,7 +714,7 @@ public class usersForm extends javax.swing.JFrame {
     private javax.swing.JPanel refresh;
     private javax.swing.JPanel search;
     private javax.swing.JTextField searchField;
-    private javax.swing.JTable usersTable;
+    public javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 
     
