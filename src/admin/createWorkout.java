@@ -542,7 +542,13 @@ try {
     }//GEN-LAST:event_updateActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
+        
+        wn.setText("");
+        descrip.setText("");
+        dl.setSelectedIndex(0);
+        dm.setText("");
+        cid.setText("");
+        wid.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
     private void dlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlActionPerformed

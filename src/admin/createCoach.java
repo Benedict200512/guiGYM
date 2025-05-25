@@ -493,83 +493,96 @@ public class createCoach extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        if (coachid.getText().isEmpty() || sty.getText().isEmpty() || ey.getText().isEmpty() ||
-            stat.getSelectedItem() == null || cn.getText().isEmpty() || fn.getText().isEmpty()) {
+       if (coachid.getText().isEmpty() || sty.getText().isEmpty() || ey.getText().isEmpty() ||
+    stat.getSelectedItem() == null || cn.getText().isEmpty() || fn.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null, "All fields are required!");
-            return;
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+    return;
 
-        } else if (!cn.getText().matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Duration must be a number in minutes.");
-            cn.setText("");
-            return;
+} else if (!ey.getText().matches("\\d+")) {
+    JOptionPane.showMessageDialog(null, "Experience years must be a number.");
+    ey.setText("");
+    return;
+
+} else if (!cn.getText().matches("\\d+")) {
+    JOptionPane.showMessageDialog(null, "Contact must be numeric.");
+    cn.setText("");
+    return;
+}
+
+int coachId = Integer.parseInt(coachid.getText().trim());
+String fullName = sty.getText().trim();           // full_name
+String specialty = fn.getText().trim();           // specialty
+int experienceYears = Integer.parseInt(ey.getText().trim());
+String contact = cn.getText().trim();             // contact_years (assuming number)
+String status = stat.getSelectedItem().toString();
+
+try {
+    dbConnector dbc = new dbConnector();
+
+    String updateSQL = "UPDATE tbl_coach SET full_name = ?, specialty = ?, experience_years = ?, contact_years = ?, status = ? WHERE coach_id = ?";
+    PreparedStatement pst = dbc.connect.prepareStatement(updateSQL);
+    pst.setString(1, fullName);
+    pst.setString(2, specialty);
+    pst.setInt(3, experienceYears);
+    pst.setString(4, contact);
+    pst.setString(5, status);
+    pst.setInt(6, coachId);
+
+    int rowsUpdated = pst.executeUpdate();
+
+    if (rowsUpdated > 0) {
+        Session sess = Session.getInstance();
+        int userId = sess.getUserId();
+
+        if (userId > 0) {
+            String logAction = "Updated Coach Record with ID No. " + coachId;
+            String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+            logPst.setInt(1, userId);
+            logPst.setString(2, logAction);
+            logPst.executeUpdate();
+            logPst.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid session user ID. Logging skipped.");
         }
 
-        int workoutId = Integer.parseInt(coachid.getText().trim());
-        String workoutName = sty.getText().trim();
-        String description = ey.getText().trim();
-        String difficultyLevel = stat.getSelectedItem().toString();
-        int durationMinutes = Integer.parseInt(cn.getText().trim());
-        int coachId = Integer.parseInt(fn.getText().trim());
+        JOptionPane.showMessageDialog(null, "Coach updated successfully!");
 
-        try {
-            dbConnector dbc = new dbConnector();
+        coachForm cf = new coachForm();
+        cf.setVisible(true);
+        this.dispose();
 
-            String updateSQL = "UPDATE tbl_workout SET coach_id = ?, workout_name = ?, description = ?, difficulty_level = ?, duration_minutes = ? WHERE workout_id = ?";
-            PreparedStatement pst = dbc.connect.prepareStatement(updateSQL);
-            pst.setInt(1, coachId);
-            pst.setString(2, workoutName);
-            pst.setString(3, description);
-            pst.setString(4, difficultyLevel);
-            pst.setInt(5, durationMinutes);
-            pst.setInt(6, workoutId);
+        // Clear fields
+        sty.setText("");
+        fn.setText("");
+        ey.setText("");
+        cn.setText("");
+        stat.setSelectedIndex(0);
+        coachid.setText("");
 
-            int rowsUpdated = pst.executeUpdate();
+    } else {
+        JOptionPane.showMessageDialog(null, "Failed to update coach.");
+    }
 
-            if (rowsUpdated > 0) {
-                
-                Session sess = Session.getInstance();
-                int userId = sess.getUserId();
+    pst.close();
 
-                if (userId > 0) {
-                    String logAction = "Updated Workout Record with ID No. " + workoutId;
-                    String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
-                    PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
-                    logPst.setInt(1, userId);
-                    logPst.setString(2, logAction);
-                    logPst.executeUpdate();
-                    logPst.close();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid session user ID. Logging skipped.");
-                }
+} catch (SQLException ex) {
+    JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
+    ex.printStackTrace();
+}
 
-                JOptionPane.showMessageDialog(null, "Workout updated successfully!");
-                coachForm cf = new coachForm();
-                cf.setVisible(true);
-                this.dispose();
-                
-                sty.setText("");
-                ey.setText("");
-                stat.setSelectedIndex(0);
-                cn.setText("");
-                fn.setText("");
-                coachid.setText("");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to update workout.");
-            }
-
-            pst.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
-            ex.printStackTrace();
-        }
 
     }//GEN-LAST:event_updateActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
+        coachid.setText("");
+        fn.setText("");
+        cn.setText("");
+        stat.setSelectedIndex(0);
+        ey.setText("");
+        sty.setText("");
+      
     }//GEN-LAST:event_clearActionPerformed
 
     private void statActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statActionPerformed

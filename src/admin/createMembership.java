@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import user.workoutTable;
 
 /**
  *
@@ -25,6 +26,17 @@ public class createMembership extends javax.swing.JFrame {
     public createMembership() {
         initComponents();
     }
+    public void setSelectedUserId(String userId) {
+    uid.setText(userId);  
+}
+    public void setSelectedWorkoutId(String workoutId) {
+    wid.setText(workoutId);  
+}
+    public void setWorkoutDetails(String workoutId, String coachId) {
+    wid.setText(workoutId);   
+    coachid.setText(coachId);     
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +56,7 @@ public class createMembership extends javax.swing.JFrame {
         mc = new javax.swing.JTextField();
         sd = new javax.swing.JTextField();
         ed = new javax.swing.JTextField();
-        uid = new javax.swing.JTextField();
+        wid = new javax.swing.JTextField();
         mid = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -65,8 +77,19 @@ public class createMembership extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         clear = new javax.swing.JButton();
         ms = new javax.swing.JComboBox<>();
+        user = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        coachid = new javax.swing.JTextField();
+        uid = new javax.swing.JTextField();
+        workout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Header.setBackground(new java.awt.Color(0, 153, 153));
         Header.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
@@ -132,7 +155,7 @@ public class createMembership extends javax.swing.JFrame {
             }
         });
         jPanel2.add(mc);
-        mc.setBounds(390, 350, 240, 30);
+        mc.setBounds(390, 420, 240, 30);
 
         sd.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         sd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -143,7 +166,7 @@ public class createMembership extends javax.swing.JFrame {
             }
         });
         jPanel2.add(sd);
-        sd.setBounds(390, 270, 240, 30);
+        sd.setBounds(390, 340, 240, 30);
 
         ed.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         ed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -154,18 +177,19 @@ public class createMembership extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ed);
-        ed.setBounds(390, 310, 240, 30);
+        ed.setBounds(390, 380, 240, 30);
 
-        uid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        uid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        uid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        uid.addActionListener(new java.awt.event.ActionListener() {
+        wid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        wid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        wid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        wid.setEnabled(false);
+        wid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uidActionPerformed(evt);
+                widActionPerformed(evt);
             }
         });
-        jPanel2.add(uid);
-        uid.setBounds(390, 190, 100, 30);
+        jPanel2.add(wid);
+        wid.setBounds(390, 220, 100, 30);
 
         mid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         mid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -177,37 +201,37 @@ public class createMembership extends javax.swing.JFrame {
             }
         });
         jPanel2.add(mid);
-        mid.setBounds(390, 150, 100, 30);
+        mid.setBounds(390, 140, 100, 30);
 
         jLabel10.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel10.setText("Membership Cost:");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(220, 340, 160, 50);
+        jLabel10.setBounds(220, 410, 160, 50);
 
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel9.setText("End Date:");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(220, 300, 180, 50);
+        jLabel9.setBounds(220, 370, 180, 50);
 
         jLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel11.setText("Start Date:");
         jPanel2.add(jLabel11);
-        jLabel11.setBounds(220, 260, 170, 50);
+        jLabel11.setBounds(220, 330, 170, 50);
 
         jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel8.setText("Membership Status:");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(220, 220, 170, 50);
+        jLabel8.setBounds(220, 290, 170, 50);
 
         jLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel13.setText("User ID:");
+        jLabel13.setText("Workout ID:");
         jPanel2.add(jLabel13);
-        jLabel13.setBounds(220, 180, 170, 50);
+        jLabel13.setBounds(220, 210, 170, 50);
 
         jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
         jLabel6.setText("Membership ID:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(220, 140, 170, 50);
+        jLabel6.setBounds(220, 130, 170, 50);
 
         jPanel6.setBackground(new java.awt.Color(0, 153, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -325,7 +349,59 @@ public class createMembership extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ms);
-        ms.setBounds(390, 230, 240, 30);
+        ms.setBounds(390, 300, 240, 30);
+
+        user.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-add-30.png"))); // NOI18N
+        user.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userMouseClicked(evt);
+            }
+        });
+        jPanel2.add(user);
+        user.setBounds(500, 180, 30, 30);
+
+        jLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
+        jLabel14.setText("Coach ID:");
+        jPanel2.add(jLabel14);
+        jLabel14.setBounds(220, 250, 170, 50);
+
+        jLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
+        jLabel15.setText("User ID:");
+        jPanel2.add(jLabel15);
+        jLabel15.setBounds(220, 170, 170, 50);
+
+        coachid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        coachid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        coachid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        coachid.setEnabled(false);
+        coachid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coachidActionPerformed(evt);
+            }
+        });
+        jPanel2.add(coachid);
+        coachid.setBounds(390, 260, 100, 30);
+
+        uid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        uid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        uid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        uid.setEnabled(false);
+        uid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uidActionPerformed(evt);
+            }
+        });
+        jPanel2.add(uid);
+        uid.setBounds(390, 180, 100, 30);
+
+        workout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-add-30.png"))); // NOI18N
+        workout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                workoutMouseClicked(evt);
+            }
+        });
+        jPanel2.add(workout);
+        workout.setBounds(500, 220, 30, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,94 +438,97 @@ public class createMembership extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 
-    if ( uid.getText().isEmpty() ||
-        ms.getSelectedItem() == null || sd.getText().isEmpty() ||
-        ed.getText().isEmpty() || mc.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "All fields are required!");
-        return;
-    }
-    if (!mc.getText().matches("\\d+(\\.\\d{1,2})?")) {
-        JOptionPane.showMessageDialog(null, "Cost must be a valid number (e.g. 100 or 99.99).");
-        mc.setText("");
-        return;
-    }
+    if (uid.getText().isEmpty() || wid.getText().isEmpty() ||
+    ms.getSelectedItem() == null || sd.getText().isEmpty() ||
+    ed.getText().isEmpty() || mc.getText().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+    return;
+}
 
-    
-    String datePattern = "\\d{4}-\\d{2}-\\d{2}";
-    String startText = sd.getText().trim();
-    String endText   = ed.getText().trim();
+if (!mc.getText().matches("\\d+(\\.\\d{1,2})?")) {
+    JOptionPane.showMessageDialog(null, "Cost must be a valid number (e.g. 100 or 99.99).");
+    mc.setText("");
+    return;
+}
 
-    if (!startText.matches(datePattern) || !endText.matches(datePattern)) {
-        JOptionPane.showMessageDialog(null,
-            "Dates must be in the format YYYY-MM-DD.\n" +
-            "Example: 2025-06-01");
-        return;
-    }
+String datePattern = "\\d{4}-\\d{2}-\\d{2}";
+String startText = sd.getText().trim();
+String endText = ed.getText().trim();
 
-    java.sql.Date startDate;
-    java.sql.Date endDate;
-    try {
-        startDate = java.sql.Date.valueOf(startText);
-        endDate   = java.sql.Date.valueOf(endText);
-    } catch (IllegalArgumentException ex) {
-        JOptionPane.showMessageDialog(null,
-            "Invalid date value. Please ensure the month is 01–12 and the day is valid for that month.");
-        return;
-    }
-    int    userId       = Integer.parseInt(uid.getText().trim());
-    String status       = ms.getSelectedItem().toString();
-    double cost         = Double.parseDouble(mc.getText().trim());
+if (!startText.matches(datePattern) || !endText.matches(datePattern)) {
+    JOptionPane.showMessageDialog(null,
+        "Dates must be in the format YYYY-MM-DD.\nExample: 2025-06-01");
+    return;
+}
 
-   
-    try {
-        dbConnector dbc = new dbConnector();
-        String sql = "INSERT INTO tbl_membership "
-                   + "(user_id, m_status, m_start_date, m_end_date, m_cost) "
-                   + "VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement pst = dbc.connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        pst.setInt(1, userId);
-        pst.setString(2, status);
-        pst.setDate(3, startDate);
-        pst.setDate(4, endDate);
-        pst.setDouble(5, cost);
+java.sql.Date startDate;
+java.sql.Date endDate;
+try {
+    startDate = java.sql.Date.valueOf(startText);
+    endDate = java.sql.Date.valueOf(endText);
+} catch (IllegalArgumentException ex) {
+    JOptionPane.showMessageDialog(null,
+        "Invalid date value. Please ensure the month is 01–12 and the day is valid for that month.");
+    return;
+}
 
-        int rowsInserted = pst.executeUpdate();
-        if (rowsInserted > 0) {
-            ResultSet rs = pst.getGeneratedKeys();
-            int newId = rs.next() ? rs.getInt(1) : -1;
+int userId = Integer.parseInt(uid.getText().trim());
+int workoutId = Integer.parseInt(wid.getText().trim());
+String status = ms.getSelectedItem().toString();
+double cost = Double.parseDouble(mc.getText().trim());
 
-            
-            Session sess = Session.getInstance();
-            int currentUser = sess.getUserId();
-            if (currentUser > 0) {
-                String logSql = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
-                PreparedStatement logPst = dbc.connect.prepareStatement(logSql);
-                logPst.setInt(1, currentUser);
-                logPst.setString(2, "Created Membership with ID No. " + newId);
-                logPst.executeUpdate();
-                logPst.close();
-            }
+try {
+    dbConnector dbc = new dbConnector();
+    String sql = "INSERT INTO tbl_membership (user_id, workout_id, m_status, m_start_date, m_end_date, m_cost) " +
+                 "VALUES (?, ?, ?, ?, ?, ?)";
+    PreparedStatement pst = dbc.connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    pst.setInt(1, userId);
+    pst.setInt(2, workoutId);
+    pst.setString(3, status);
+    pst.setDate(4, startDate);
+    pst.setDate(5, endDate);
+    pst.setDouble(6, cost);
 
-            JOptionPane.showMessageDialog(null, "Membership created successfully!");
-            membershipForm mf = new membershipForm();
-            mf.setVisible(true);
-            this.dispose();
-            
-            mid.setText("");
-            uid.setText("");
-            ms.setSelectedIndex(0);
-            sd.setText("");
-            ed.setText("");
-            mc.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to add membership.");
+    int rowsInserted = pst.executeUpdate();
+    if (rowsInserted > 0) {
+        ResultSet rs = pst.getGeneratedKeys();
+        int newId = rs.next() ? rs.getInt(1) : -1;
+
+        Session sess = Session.getInstance();
+        int currentUser = sess.getUserId();
+        if (currentUser > 0) {
+            String logSql = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logSql);
+            logPst.setInt(1, currentUser);
+            logPst.setString(2, "Created Membership with ID No. " + newId);
+            logPst.executeUpdate();
+            logPst.close();
         }
-        pst.close();
 
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
-        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Membership created successfully!");
+        membershipForm mf = new membershipForm();
+        mf.setVisible(true);
+        this.dispose();
+
+        mid.setText("");
+        uid.setText("");
+        wid.setText("");
+        ms.setSelectedIndex(0);
+        sd.setText("");
+        ed.setText("");
+        mc.setText("");
+
+    } else {
+        JOptionPane.showMessageDialog(null, "Failed to add membership.");
     }
+
+    pst.close();
+
+} catch (SQLException ex) {
+    JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage());
+    ex.printStackTrace();
+}
+
 
 
 
@@ -467,9 +546,9 @@ public class createMembership extends javax.swing.JFrame {
 
     }//GEN-LAST:event_edActionPerformed
 
-    private void uidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uidActionPerformed
+    private void widActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_widActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_uidActionPerformed
+    }//GEN-LAST:event_widActionPerformed
 
     private void midActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_midActionPerformed
 
@@ -495,7 +574,7 @@ public class createMembership extends javax.swing.JFrame {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         
-    if ( uid.getText().isEmpty() ||
+    if ( uid.getText().isEmpty() || wid.getText().isEmpty() ||
         ms.getSelectedItem() == null || sd.getText().isEmpty() ||
         ed.getText().isEmpty() || mc.getText().isEmpty()) {
 
@@ -511,6 +590,7 @@ public class createMembership extends javax.swing.JFrame {
     
     int membershipId   = Integer.parseInt(mid.getText().trim());
     int userId         = Integer.parseInt(uid.getText().trim());
+    int workoutId         = Integer.parseInt(wid.getText().trim());
     String status      = ms.getSelectedItem().toString();
     java.sql.Date startDate = java.sql.Date.valueOf(sd.getText().trim());
     java.sql.Date endDate   = java.sql.Date.valueOf(ed.getText().trim());
@@ -520,16 +600,17 @@ public class createMembership extends javax.swing.JFrame {
         dbConnector dbc = new dbConnector();
         String updateSQL = 
             "UPDATE tbl_membership " +
-            "SET user_id = ?, m_status = ?, m_start_date = ?, m_end_date = ?, m_cost = ? " +
+            "SET user_id = ?, workout_id = ?, m_status = ?, m_start_date = ?, m_end_date = ?, m_cost = ? " +
             "WHERE membership_id = ?";
 
         PreparedStatement pst = dbc.connect.prepareStatement(updateSQL);
         pst.setInt(1, userId);
-        pst.setString(2, status);
-        pst.setDate(3, startDate);
-        pst.setDate(4, endDate);
-        pst.setDouble(5, cost);
-        pst.setInt(6, membershipId);
+        pst.setInt(2, workoutId);
+        pst.setString(3, status);
+        pst.setDate(4, startDate);
+        pst.setDate(5, endDate);
+        pst.setDouble(6, cost);
+        pst.setInt(7, membershipId);
 
         int rowsUpdated = pst.executeUpdate();
         pst.close();
@@ -559,6 +640,7 @@ public class createMembership extends javax.swing.JFrame {
             
             mid.setText("");
             uid.setText("");
+            wid.setText("");
             ms.setSelectedIndex(0);
             sd.setText("");
             ed.setText("");
@@ -578,12 +660,43 @@ public class createMembership extends javax.swing.JFrame {
     }//GEN-LAST:event_updateActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
+             mid.setText("");
+            uid.setText("");
+            wid.setText("");
+            ms.setSelectedIndex(0);
+            sd.setText("");
+            ed.setText("");
+            mc.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
     private void msActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_msActionPerformed
+
+    private void userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseClicked
+        userTable ut = new userTable(this); 
+        ut.setVisible(true);
+        this.setVisible(false); 
+
+    }//GEN-LAST:event_userMouseClicked
+
+    private void coachidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coachidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_coachidActionPerformed
+
+    private void uidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uidActionPerformed
+
+    private void workoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workoutMouseClicked
+        workoutTablee wt = new workoutTablee(this);  
+        wt.setVisible(true);
+        this.setVisible(false); 
+    }//GEN-LAST:event_workoutMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -627,11 +740,14 @@ public class createMembership extends javax.swing.JFrame {
     private javax.swing.JButton cancel1;
     private javax.swing.JButton cancel4;
     public javax.swing.JButton clear;
+    public javax.swing.JTextField coachid;
     public javax.swing.JTextField ed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -651,5 +767,8 @@ public class createMembership extends javax.swing.JFrame {
     public javax.swing.JTextField sd;
     public javax.swing.JTextField uid;
     public javax.swing.JButton update;
+    private javax.swing.JLabel user;
+    public javax.swing.JTextField wid;
+    private javax.swing.JLabel workout;
     // End of variables declaration//GEN-END:variables
 }

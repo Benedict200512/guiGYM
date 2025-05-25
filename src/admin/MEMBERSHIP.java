@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.PanelPrinter;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import sampleguigym1.loginForm;
@@ -31,82 +33,9 @@ public class MEMBERSHIP extends javax.swing.JFrame {
      */
     public MEMBERSHIP() {
         initComponents();
-        usersTable.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting()) {
-        int row = usersTable.getSelectedRow();
-        if (row >= 0) {
-            userIdField.setText(   usersTable.getValueAt(row, 0).toString() );
-            firstNameField.setText(usersTable.getValueAt(row, 1).toString() );
-            lastNameField.setText( usersTable.getValueAt(row, 2).toString() );
-        }
-    }
-}); 
-        workoutTable.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting()) {
-        int row = workoutTable.getSelectedRow();
-        if (row >= 0) {
-            wnField.setText(  workoutTable.getValueAt(row, 0).toString() );
-        }
-    }
-}); coachTable.getSelectionModel().addListSelectionListener(e -> {
-    if (!e.getValueIsAdjusting()) {
-        int row = coachTable.getSelectedRow();
-        if (row >= 0) {
-            fullNameField.setText( coachTable.getValueAt(row, 0).toString() );
-        }
-    }
-});
-        
-        displayData();
-    }
-    private int membershipCounter = 1;
-        Color navcolor = new Color(153,255,255);
-        Color hovercolor = new Color (0,204,204);
-    public void displayData(){
-  
-    try {
-        dbConnector dbc = new dbConnector();
-        String sqlU = 
-          "SELECT user_id AS User_ID, " +
-          "       user_firstname AS First_Name, " +
-          "       user_lastname  AS Last_Name, " +
-          "       user_usertype  AS User_Type " +
-          "  FROM tbl_user";
-        ResultSet rsU = dbc.getData(sqlU);
-        usersTable.setModel(DbUtils.resultSetToTableModel(rsU));
-        rsU.close();
-    } catch (SQLException ex) {
-        System.out.println("Errors loading users: " + ex.getMessage());
-    }
-
-   
-    try {
-        dbConnector dbc = new dbConnector();
-        String sqlW = 
-          "SELECT workout_id   AS Workout_ID, " +
-          "       workout_name AS Workout_Name " +
-          "  FROM tbl_workout";
-        ResultSet rsW = dbc.getData(sqlW);
-        workoutTable.setModel(DbUtils.resultSetToTableModel(rsW));
-        rsW.close();
-    } catch (SQLException ex) {
-        System.out.println("Errors loading workouts: " + ex.getMessage());
-    }
-
-    
-    try {
-        dbConnector dbc = new dbConnector();
-        String sqlC = 
-          "SELECT coach_id   AS Coach_ID, " +
-          "       full_name  AS Full_Name " +
-          "  FROM tbl_coach";
-        ResultSet rsC = dbc.getData(sqlC);
-        coachTable.setModel(DbUtils.resultSetToTableModel(rsC));
-        rsC.close();
-    } catch (SQLException ex) {
-        System.out.println("Errors loading coaches: " + ex.getMessage());
-    }
 }
+     Color navcolor = new Color(0,204,204);
+    Color hovercolor = new Color (153,255,252);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,49 +52,37 @@ public class MEMBERSHIP extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        delete = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         acc_name = new javax.swing.JLabel();
-        add = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        clear = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        update = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         print = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        coachTable = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        usersTable = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        workoutTable = new javax.swing.JTable();
+        page = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        mid = new javax.swing.JLabel();
+        uid = new javax.swing.JLabel();
+        wid = new javax.swing.JLabel();
+        ms = new javax.swing.JLabel();
+        sd = new javax.swing.JLabel();
+        mc = new javax.swing.JLabel();
+        ed = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel83 = new javax.swing.JLabel();
-        jLabel84 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        fullNameField = new javax.swing.JTextField();
-        userIdField = new javax.swing.JTextField();
-        firstNameField = new javax.swing.JTextField();
-        wnField = new javax.swing.JTextField();
-        mc = new javax.swing.JTextField();
-        jLabel86 = new javax.swing.JLabel();
-        jLabel87 = new javax.swing.JLabel();
-        mid = new javax.swing.JTextField();
-        jLabel88 = new javax.swing.JLabel();
-        sd = new javax.swing.JTextField();
-        jLabel89 = new javax.swing.JLabel();
-        jLabel90 = new javax.swing.JLabel();
-        ed = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        membershipTable = new javax.swing.JTable();
-        ms = new javax.swing.JComboBox<>();
-        jLabel91 = new javax.swing.JLabel();
-        lastNameField = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -222,28 +139,6 @@ public class MEMBERSHIP extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        delete.setBackground(new java.awt.Color(153, 255, 252));
-        delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteMouseExited(evt);
-            }
-        });
-        delete.setLayout(null);
-
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("DELETE");
-        delete.add(jLabel6);
-        jLabel6.setBounds(0, 10, 220, 30);
-
-        jPanel2.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 220, 50));
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/images-removebg-preview (1).png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 300, 240));
@@ -260,73 +155,8 @@ public class MEMBERSHIP extends javax.swing.JFrame {
 
         jPanel2.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 30));
 
-        add.setBackground(new java.awt.Color(153, 255, 252));
-        add.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addMouseExited(evt);
-            }
-        });
-        add.setLayout(null);
-
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("ADD");
-        add.add(jLabel5);
-        jLabel5.setBounds(0, 10, 220, 30);
-
-        jPanel2.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 220, 50));
-
-        clear.setBackground(new java.awt.Color(153, 255, 252));
-        clear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                clearMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                clearMouseExited(evt);
-            }
-        });
-        clear.setLayout(null);
-
-        jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("CLEAR");
-        clear.add(jLabel7);
-        jLabel7.setBounds(0, 10, 220, 30);
-
-        jPanel2.add(clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 220, 50));
-
-        update.setBackground(new java.awt.Color(153, 255, 252));
-        update.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                updateMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                updateMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                updateMouseExited(evt);
-            }
-        });
-        update.setLayout(null);
-
-        jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("UPDATE");
-        update.add(jLabel8);
-        jLabel8.setBounds(0, 10, 220, 30);
-
-        jPanel2.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 220, 50));
-
-        print.setBackground(new java.awt.Color(153, 255, 252));
+        print.setBackground(new java.awt.Color(0, 153, 153));
+        print.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         print.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 printMouseClicked(evt);
@@ -340,13 +170,13 @@ public class MEMBERSHIP extends javax.swing.JFrame {
         });
         print.setLayout(null);
 
-        jLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 36)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("PRINT");
         print.add(jLabel11);
-        jLabel11.setBounds(0, 10, 220, 30);
+        jLabel11.setBounds(0, 140, 220, 30);
 
-        jPanel2.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 220, 50));
+        jPanel2.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 220, 310));
 
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 990));
 
@@ -362,183 +192,210 @@ public class MEMBERSHIP extends javax.swing.JFrame {
 
         Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 860, 90));
 
-        coachTable.setBackground(new java.awt.Color(0, 102, 102));
-        coachTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        coachTable.setFont(new java.awt.Font("Agency FB", 0, 15)); // NOI18N
-        coachTable.setForeground(new java.awt.Color(255, 255, 255));
-        coachTable.setGridColor(new java.awt.Color(0, 102, 102));
-        jScrollPane1.setViewportView(coachTable);
+        page.setBackground(new java.awt.Color(102, 255, 255));
+        page.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
 
-        Container.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 730, 140));
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
-        usersTable.setBackground(new java.awt.Color(0, 102, 102));
-        usersTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        usersTable.setFont(new java.awt.Font("Agency FB", 0, 15)); // NOI18N
-        usersTable.setForeground(new java.awt.Color(255, 255, 255));
-        usersTable.setGridColor(new java.awt.Color(0, 102, 102));
-        jScrollPane4.setViewportView(usersTable);
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("BEN FITNESS GYM - CITY OF NAGA, CEBU.");
 
-        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 370, 230));
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("West Poblacion, City of Naga, Cebu");
 
-        workoutTable.setBackground(new java.awt.Color(0, 102, 102));
-        workoutTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        workoutTable.setFont(new java.awt.Font("Agency FB", 0, 15)); // NOI18N
-        workoutTable.setForeground(new java.awt.Color(255, 255, 255));
-        workoutTable.setGridColor(new java.awt.Color(0, 102, 102));
-        jScrollPane5.setViewportView(workoutTable);
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel6.setText("Membership ID:");
 
-        Container.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 370, 230));
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel7.setText("User ID:");
 
-        jLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel16.setText("Coach Name:");
-        Container.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 840, 120, 30));
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setText("Workout ID:");
 
-        jLabel83.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel83.setText("Membership Cost:");
-        Container.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 1000, -1, 30));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel9.setText("Membership Status:");
 
-        jLabel84.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel84.setText("User ID:");
-        Container.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 880, -1, 30));
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel10.setText("Start Date:");
 
-        jLabel85.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel85.setText("Workout Name:");
-        Container.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 1000, -1, 30));
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel12.setText("End Date:");
 
-        fullNameField.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        fullNameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fullNameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        fullNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fullNameFieldActionPerformed(evt);
-            }
-        });
-        Container.add(fullNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 840, 180, 30));
-
-        userIdField.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        userIdField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        userIdField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        userIdField.setEnabled(false);
-        userIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userIdFieldActionPerformed(evt);
-            }
-        });
-        Container.add(userIdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 880, 80, 30));
-
-        firstNameField.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        firstNameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        firstNameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        firstNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstNameFieldActionPerformed(evt);
-            }
-        });
-        Container.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 920, 180, 30));
-
-        wnField.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        wnField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        wnField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        wnField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wnFieldActionPerformed(evt);
-            }
-        });
-        Container.add(wnField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 1000, 180, 30));
-
-        mc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        mc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        mc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mcActionPerformed(evt);
-            }
-        });
-        Container.add(mc, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 1000, 180, 30));
-
-        jLabel86.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel86.setText("First Name:");
-        Container.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 920, -1, 30));
-
-        jLabel87.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel87.setText("Membership ID:");
-        Container.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 850, -1, 10));
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel13.setText("Membership Cost:");
 
         mid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        mid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        mid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        mid.setEnabled(false);
-        mid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                midActionPerformed(evt);
-            }
-        });
-        Container.add(mid, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 840, 80, 30));
+        mid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel88.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel88.setText("Membership Status:");
-        Container.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 880, -1, 30));
+        uid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        uid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        uid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        sd.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        sd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        sd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        sd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sdActionPerformed(evt);
-            }
-        });
-        Container.add(sd, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 920, 180, 30));
-
-        jLabel89.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel89.setText("Start Date:");
-        Container.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 920, -1, 30));
-
-        jLabel90.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel90.setText("End Date:");
-        Container.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 960, -1, 30));
-
-        ed.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        ed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        ed.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        ed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edActionPerformed(evt);
-            }
-        });
-        Container.add(ed, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 960, 180, 30));
-
-        membershipTable.setBackground(new java.awt.Color(0, 102, 102));
-        membershipTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        membershipTable.setFont(new java.awt.Font("Agency FB", 0, 15)); // NOI18N
-        membershipTable.setForeground(new java.awt.Color(255, 255, 255));
-        membershipTable.setGridColor(new java.awt.Color(0, 102, 102));
-        jScrollPane2.setViewportView(membershipTable);
-
-        Container.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 660, 730, 140));
+        wid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        wid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        wid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         ms.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        ms.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Active", "Expired", "Cancelled" }));
-        ms.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        ms.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                msActionPerformed(evt);
-            }
-        });
-        Container.add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 880, 180, 30));
+        ms.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ms.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel91.setFont(new java.awt.Font("Franklin Gothic Heavy", 3, 15)); // NOI18N
-        jLabel91.setText("Last Name:");
-        Container.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 960, -1, 30));
+        sd.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        sd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lastNameField.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lastNameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        lastNameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        lastNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameFieldActionPerformed(evt);
-            }
-        });
-        Container.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 960, 180, 30));
+        mc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        mc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        ed.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        ed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ed.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPanel5.setLayout(null);
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Dark Blue and Brown Illustrative Fitness Gym Logo (5).png"))); // NOI18N
+        jPanel5.add(jLabel14);
+        jLabel14.setBounds(-2, -4, 230, 330);
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("\"At Ben Fitness Gym, we don’t just build bodies — we build");
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("confidence, discipline, and the strength to become your best self.");
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Your journey starts here.\"");
+
+        javax.swing.GroupLayout pageLayout = new javax.swing.GroupLayout(page);
+        page.setLayout(pageLayout);
+        pageLayout.setHorizontalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(mid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(uid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pageLayout.createSequentialGroup()
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pageLayout.createSequentialGroup()
+                                    .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(ms, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(wid, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pageLayout.createSequentialGroup()
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ed, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+            .addComponent(jSeparator2)
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pageLayout.setVerticalGroup(
+            pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(30, 30, 30)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pageLayout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(mid, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(uid, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pageLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wid, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ms, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sd, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ed, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mc, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pageLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(48, 48, 48)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        Container.add(page, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 660, 660));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -551,19 +408,13 @@ public class MEMBERSHIP extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, 1097, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        adminDashboard ads = new adminDashboard();
-        ads.setVisible(true);
-        this.dispose();                
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session sess = Session.getInstance();
@@ -577,159 +428,26 @@ public class MEMBERSHIP extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void clearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseExited
-        clear.setBackground(navcolor);
-    }//GEN-LAST:event_clearMouseExited
-
-    private void clearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseEntered
-       clear.setBackground(hovercolor);
-    }//GEN-LAST:event_clearMouseEntered
-
-    private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearMouseClicked
-
-    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
-        add.setBackground(navcolor);
-    }//GEN-LAST:event_addMouseExited
-
-    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
-        add.setBackground(hovercolor);
-    }//GEN-LAST:event_addMouseEntered
-
-    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
-    
-    String membershipID = String.valueOf(membershipCounter);
-    String userID = userIdField.getText();
-    String firstName = firstNameField.getText();
-    String lastName = lastNameField.getText();
-    String workoutName = wnField.getText();
-    String coachName = fullNameField.getText();
-    String startDate = sd.getText();
-    String endDate = ed.getText();
-    String cost = mc.getText();
-    String status = (String) ms.getSelectedItem();
-
-    if (userID.isEmpty() || firstName.isEmpty() || lastName.isEmpty() ||
-        workoutName.isEmpty() || coachName.isEmpty() || startDate.isEmpty() ||
-        endDate.isEmpty() || cost.isEmpty() || status.isEmpty()) {
-        
-        JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
-        return;
-    }
-
-    DefaultTableModel model = (DefaultTableModel) membershipTable.getModel();
-    model.addRow(new Object[]{
-        membershipID,
-        userID,
-        firstName,
-        lastName,
-        workoutName,
-        coachName,
-        startDate,
-        endDate,
-        cost,
-        status
-    });
-
-    membershipTable.scrollRectToVisible(
-    membershipTable.getCellRect(membershipTable.getRowCount() - 1, 0, true)
-    );
-
-    JOptionPane.showMessageDialog(null, "Membership added successfully.");
-
-    membershipCounter++;
-    mid.setText(String.valueOf(membershipCounter));
-
-   
-    userIdField.setText("");
-    firstNameField.setText("");
-    lastNameField.setText("");
-    wnField.setText("");
-    fullNameField.setText("");
-    sd.setText("");
-    ed.setText("");
-    mc.setText("");
-    ms.setSelectedIndex(0);
-
-    }//GEN-LAST:event_addMouseClicked
-
-    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
-      delete.setBackground(navcolor);
-    }//GEN-LAST:event_deleteMouseExited
-      
-    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
-      delete.setBackground(hovercolor);
-    }//GEN-LAST:event_deleteMouseEntered
-
-    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-
-    }//GEN-LAST:event_deleteMouseClicked
-
-    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateMouseClicked
-
-    private void updateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseEntered
-       update.setBackground(hovercolor);
-    }//GEN-LAST:event_updateMouseEntered
-
-    private void updateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseExited
-       update.setBackground(navcolor);
-    }//GEN-LAST:event_updateMouseExited
-
-    private void printMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_printMouseClicked
+    private void printMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseExited
+        print.setBackground(navcolor);
+    }//GEN-LAST:event_printMouseExited
 
     private void printMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseEntered
         print.setBackground(hovercolor);
     }//GEN-LAST:event_printMouseEntered
 
-    private void printMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseExited
-        print.setBackground(navcolor);
-    }//GEN-LAST:event_printMouseExited
+    private void printMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseClicked
+        JPanel myPanel = new JPanel();
+        PanelPrinter pPrint = new PanelPrinter(page);
+        pPrint.printPanel();
+    }//GEN-LAST:event_printMouseClicked
 
-    private void fullNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fullNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fullNameFieldActionPerformed
-
-    private void userIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userIdFieldActionPerformed
-
-    private void firstNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstNameFieldActionPerformed
-
-    private void wnFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wnFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_wnFieldActionPerformed
-
-    private void mcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mcActionPerformed
-
-    private void midActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_midActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_midActionPerformed
-
-    private void sdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sdActionPerformed
-
-    private void edActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edActionPerformed
-
-    private void msActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_msActionPerformed
-
-    private void lastNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameFieldActionPerformed
-
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        adminDashboard ads = new adminDashboard();
+        ads.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+      
     /**
      * @param args the command line arguments
      */
@@ -769,51 +487,39 @@ public class MEMBERSHIP extends javax.swing.JFrame {
     private javax.swing.JPanel Container;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel acc_name;
-    private javax.swing.JPanel add;
-    private javax.swing.JPanel clear;
-    public javax.swing.JTable coachTable;
-    private javax.swing.JPanel delete;
-    public javax.swing.JTextField ed;
-    public javax.swing.JTextField firstNameField;
-    public javax.swing.JTextField fullNameField;
+    public javax.swing.JLabel ed;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel83;
-    private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel86;
-    private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    public javax.swing.JTextField lastNameField;
-    public javax.swing.JTextField mc;
-    public javax.swing.JTable membershipTable;
-    public javax.swing.JTextField mid;
-    public javax.swing.JComboBox<String> ms;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    public javax.swing.JLabel mc;
+    public javax.swing.JLabel mid;
+    public javax.swing.JLabel ms;
+    private javax.swing.JPanel page;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel print;
-    public javax.swing.JTextField sd;
-    private javax.swing.JPanel update;
-    public javax.swing.JTextField userIdField;
-    public javax.swing.JTable usersTable;
-    public javax.swing.JTextField wnField;
-    public javax.swing.JTable workoutTable;
+    public javax.swing.JLabel sd;
+    public javax.swing.JLabel uid;
+    public javax.swing.JLabel wid;
     // End of variables declaration//GEN-END:variables
 }

@@ -45,7 +45,10 @@ public class createUserForm extends javax.swing.JFrame {
         initComponents();
         
     }
-    
+    public void setSelectedUserId(String userId) {
+    uid.setText(userId); 
+}
+
     public String destination =""; 
     File selectedFile;
     public String oldpath;
@@ -980,7 +983,18 @@ private boolean isValidContactNumber(String contact) {
     }//GEN-LAST:event_updateActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        // TODO add your handling code here:
+        uid.setText("");
+        firstname.setText("");
+        lastname.setText("");
+        email.setText("");
+        cn.setText("");
+        ut.setSelectedIndex(0);
+        un.setText("");
+        pw.setText("");
+        us.setSelectedIndex(0);
+        sq.setSelectedIndex(0);
+        ans.setText("");
+        
     }//GEN-LAST:event_clearActionPerformed
 
     private void pwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwActionPerformed

@@ -44,14 +44,6 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         account = new javax.swing.JLabel();
-        p_add = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        p_add4 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        p_add8 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        p_add9 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         acc_name = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -162,88 +154,6 @@ public class adminDashboard extends javax.swing.JFrame {
             }
         });
         jPanel2.add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 220, -1));
-
-        p_add.setBackground(new java.awt.Color(153, 255, 252));
-        p_add.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                p_addMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_addMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_addMouseExited(evt);
-            }
-        });
-        p_add.setLayout(null);
-
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("MEMBERSHIP");
-        p_add.add(jLabel5);
-        jLabel5.setBounds(0, 10, 220, 30);
-
-        p_add4.setBackground(new java.awt.Color(153, 255, 252));
-        p_add4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add4MouseExited(evt);
-            }
-        });
-        p_add4.setLayout(null);
-
-        jLabel20.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("ADD");
-        p_add4.add(jLabel20);
-        jLabel20.setBounds(80, 10, 60, 30);
-
-        p_add.add(p_add4);
-        p_add4.setBounds(0, 0, 0, 0);
-
-        p_add8.setBackground(new java.awt.Color(153, 255, 252));
-        p_add8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add8MouseExited(evt);
-            }
-        });
-        p_add8.setLayout(null);
-
-        jLabel21.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("ADD");
-        p_add8.add(jLabel21);
-        jLabel21.setBounds(80, 10, 60, 30);
-
-        p_add9.setBackground(new java.awt.Color(153, 255, 252));
-        p_add9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                p_add9MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                p_add9MouseExited(evt);
-            }
-        });
-        p_add9.setLayout(null);
-
-        jLabel22.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("ADD");
-        p_add9.add(jLabel22);
-        jLabel22.setBounds(80, 10, 60, 30);
-
-        p_add8.add(p_add9);
-        p_add9.setBounds(0, 0, 0, 0);
-
-        p_add.add(p_add8);
-        p_add8.setBounds(0, 0, 0, 0);
-
-        jPanel2.add(p_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 220, 50));
 
         panel.setBackground(new java.awt.Color(0, 153, 153));
         panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -763,44 +673,6 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
         
     }//GEN-LAST:event_p_editMouseExited
 
-    private void p_add4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add4MouseEntered
-
-    }//GEN-LAST:event_p_add4MouseEntered
-
-    private void p_add4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add4MouseExited
-
-    }//GEN-LAST:event_p_add4MouseExited
-
-    private void p_add9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add9MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add9MouseEntered
-
-    private void p_add9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add9MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add9MouseExited
-
-    private void p_add8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add8MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add8MouseEntered
-
-    private void p_add8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add8MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p_add8MouseExited
-
-    private void p_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseClicked
-        MEMBERSHIP MB = new MEMBERSHIP();
-        MB.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_p_addMouseClicked
-
-    private void p_addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseEntered
-        p_add.setBackground(hovercolor);
-    }//GEN-LAST:event_p_addMouseEntered
-
-    private void p_addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_addMouseExited
-        p_add.setBackground(navcolor);
-    }//GEN-LAST:event_p_addMouseExited
-
     private void p_add11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add11MouseEntered
 
     }//GEN-LAST:event_p_add11MouseEntered
@@ -832,11 +704,11 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }//GEN-LAST:event_p_add10MouseClicked
 
     private void p_add10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add10MouseEntered
-        p_add.setBackground(hovercolor);
+      
     }//GEN-LAST:event_p_add10MouseEntered
 
     private void p_add10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add10MouseExited
-        p_add.setBackground(navcolor);
+       
     }//GEN-LAST:event_p_add10MouseExited
 
     private void p_add15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add15MouseEntered
@@ -870,11 +742,11 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     }//GEN-LAST:event_p_add14MouseClicked
 
     private void p_add14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add14MouseEntered
-        p_add.setBackground(hovercolor);
+       
     }//GEN-LAST:event_p_add14MouseEntered
 
     private void p_add14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_add14MouseExited
-        p_add.setBackground(navcolor);
+       
     }//GEN-LAST:event_p_add14MouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -1001,9 +873,6 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1014,7 +883,6 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1024,7 +892,6 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel logs;
     private javax.swing.JPanel membership;
-    private javax.swing.JPanel p_add;
     private javax.swing.JPanel p_add10;
     private javax.swing.JPanel p_add11;
     private javax.swing.JPanel p_add12;
@@ -1033,12 +900,9 @@ int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to logo
     private javax.swing.JPanel p_add15;
     private javax.swing.JPanel p_add16;
     private javax.swing.JPanel p_add17;
-    private javax.swing.JPanel p_add4;
     private javax.swing.JPanel p_add5;
     private javax.swing.JPanel p_add6;
     private javax.swing.JPanel p_add7;
-    private javax.swing.JPanel p_add8;
-    private javax.swing.JPanel p_add9;
     private javax.swing.JPanel p_edit;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel user;

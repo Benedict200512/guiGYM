@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.sql.Connection;
@@ -516,6 +517,9 @@ public class coachForm extends javax.swing.JFrame {
         refresh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         refresh.setForeground(new java.awt.Color(0, 153, 153));
         refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 refreshMouseEntered(evt);
             }
@@ -807,10 +811,11 @@ try {
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
        int selectedRow = coachTable.getSelectedRow(); 
 
-       if (selectedRow == -1) {
+if (selectedRow == -1) {
     JOptionPane.showMessageDialog(this, "Please select a coach to delete.");
     return;
 }
+
 int coachId = (int) coachTable.getValueAt(selectedRow, 0);
 int confirm = JOptionPane.showConfirmDialog(
     this,
@@ -827,19 +832,34 @@ if (confirm == JOptionPane.YES_OPTION) {
         PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
         ps.setInt(1, coachId);
         int rowsAffected = ps.executeUpdate();
+        ps.close();
 
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(this, "Coach ID " + coachId + " Deleted successfully.");
+
+            
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+
+            String logAction = "Deleted Coach with ID: " + coachId;
+            String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+            logPst.setInt(1, currentUserId);
+            logPst.setString(2, logAction);
+            logPst.executeUpdate();
+            logPst.close();
+
+            JOptionPane.showMessageDialog(this, "Coach ID " + coachId + " deleted successfully.");
             ((DefaultTableModel) coachTable.getModel()).removeRow(selectedRow); 
         } else {
             JOptionPane.showMessageDialog(this, "Failed to delete coach.");
         }
 
-        ps.close();
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+        ex.printStackTrace();
     }
 }
+
 
 
     }//GEN-LAST:event_deleteMouseClicked
@@ -880,6 +900,15 @@ if (rowIndex < 0) {
 }
 
     }//GEN-LAST:event_editMouseClicked
+
+    private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
+        DefaultTableModel model = (DefaultTableModel) coachTable.getModel();
+    model.setRowCount(0);
+
+   
+
+    JOptionPane.showMessageDialog(null, "Form has been refreshed.");
+    }//GEN-LAST:event_refreshMouseClicked
 
     /**
      * @param args the command line arguments

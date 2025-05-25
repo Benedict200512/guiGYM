@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.sql.PreparedStatement;
@@ -29,8 +30,9 @@ public class membershipForm extends javax.swing.JFrame {
          displayData();
     }
     
-        Color navcolor = new Color(0,153,153);
+         Color navcolor = new Color(153,255,255);
         Color hovercolor = new Color (0,204,204);
+    
         
     public void displayData(){
         try{
@@ -76,6 +78,8 @@ public class membershipForm extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        print = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         membershipTable = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
@@ -155,6 +159,9 @@ public class membershipForm extends javax.swing.JFrame {
         refresh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         refresh.setForeground(new java.awt.Color(0, 153, 153));
         refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 refreshMouseEntered(evt);
             }
@@ -276,6 +283,28 @@ public class membershipForm extends javax.swing.JFrame {
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 220, 50));
 
+        print.setBackground(new java.awt.Color(153, 255, 252));
+        print.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                printMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                printMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                printMouseExited(evt);
+            }
+        });
+        print.setLayout(null);
+
+        jLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("PRINT");
+        print.add(jLabel11);
+        jLabel11.setBounds(80, 10, 60, 30);
+
+        jPanel2.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 220, 50));
+
         Container.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 500));
 
         membershipTable.setBackground(new java.awt.Color(0, 102, 102));
@@ -389,39 +418,56 @@ public class membershipForm extends javax.swing.JFrame {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
         int selectedRow = membershipTable.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a membership to delete.");
-            return;
+
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a membership to delete.");
+    return;
+}
+
+int membershipId = (int) membershipTable.getValueAt(selectedRow, 0);
+int confirm = JOptionPane.showConfirmDialog(
+    this,
+    "Are you sure you want to delete membership with ID: " + membershipId + "?",
+    "Confirm Delete",
+    JOptionPane.YES_NO_OPTION
+);
+
+if (confirm == JOptionPane.YES_OPTION) {
+    try {
+        dbConnector dbc = new dbConnector();
+
+        String deleteQuery = "DELETE FROM tbl_membership WHERE membership_id = ?";
+        PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
+        ps.setInt(1, membershipId);
+        int rowsAffected = ps.executeUpdate();
+        ps.close();
+
+        if (rowsAffected > 0) {
+
+            
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+
+            String logAction = "Deleted Membership with ID: " + membershipId;
+            String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+            logPst.setInt(1, currentUserId);
+            logPst.setString(2, logAction);
+            logPst.executeUpdate();
+            logPst.close();
+
+            JOptionPane.showMessageDialog(this, "Membership ID " + membershipId + " deleted successfully.");
+            ((DefaultTableModel) membershipTable.getModel()).removeRow(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to delete membership.");
         }
-        int membershipId = (int) membershipTable.getValueAt(selectedRow, 0);
-        int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete membership with ID: " + membershipId + "?",
-            "Confirm Delete",
-            JOptionPane.YES_NO_OPTION
-        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
-            try {
-                dbConnector dbc = new dbConnector();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
 
-                String deleteQuery = "DELETE FROM tbl_membership WHERE membership_id = ?";
-                PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
-                ps.setInt(1, membershipId);
-                int rowsAffected = ps.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "Membership ID " + membershipId + " Deleted successfully.");
-                    ((DefaultTableModel) membershipTable.getModel()).removeRow(selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete Workout.");
-                }
-
-                ps.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
-            }
-        }
     }//GEN-LAST:event_deleteMouseClicked
 
     private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
@@ -501,6 +547,52 @@ public class membershipForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldActionPerformed
 
+    private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
+        DefaultTableModel model = (DefaultTableModel) membershipTable.getModel();
+    model.setRowCount(0);
+
+   
+
+    JOptionPane.showMessageDialog(null, "Form has been refreshed.");
+    }//GEN-LAST:event_refreshMouseClicked
+
+    private void printMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseClicked
+        int rowIndex = membershipTable.getSelectedRow();
+
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, "Please select an Item!");
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = membershipTable.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_membership WHERE membership_id = '"+tbl.getValueAt(rowIndex, 0)+"'");
+                if(rs.next()){
+                    MEMBERSHIP MP = new MEMBERSHIP();
+                    MP.mid.setText(""+rs.getInt("membership_id"));
+                    MP.uid.setText(""+rs.getInt("user_id"));
+                    MP.wid.setText(""+rs.getInt("workout_id"));
+                    MP.ms.setText(""+rs.getString("m_status"));
+                    MP.sd.setText(""+rs.getString("m_start_date"));
+                    MP.ed.setText(""+rs.getString("m_end_date"));
+                    MP.mc.setText(""+rs.getString("m_cost"));
+                    MP.setVisible(true);
+                    this.dispose();
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+
+            }
+        }
+    }//GEN-LAST:event_printMouseClicked
+
+    private void printMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseEntered
+        print.setBackground(hovercolor);
+    }//GEN-LAST:event_printMouseEntered
+
+    private void printMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printMouseExited
+        print.setBackground(navcolor);
+    }//GEN-LAST:event_printMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -544,6 +636,7 @@ public class membershipForm extends javax.swing.JFrame {
     private javax.swing.JPanel edit;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -558,6 +651,7 @@ public class membershipForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable membershipTable;
+    private javax.swing.JPanel print;
     private javax.swing.JPanel refresh;
     private javax.swing.JPanel search;
     private javax.swing.JTextField searchField;

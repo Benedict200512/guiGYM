@@ -7,11 +7,24 @@ package sampleguigym1;
 
 import config.dbConnector;
 import config.passwordHasher;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +39,85 @@ public class registrationform extends javax.swing.JFrame {
     public registrationform() {
         initComponents();
     }
+    
+    public String destination =""; 
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/userimages", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+    
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+        if(ImagePath !=null){
+            MyImage = new ImageIcon(ImagePath);
+        }else{
+            MyImage = new ImageIcon(pic);
+        }
+        
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+      public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+    
+      }
     
    public static String em, uname;
     
@@ -100,7 +192,7 @@ public class registrationform extends javax.swing.JFrame {
         ut = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         image = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        select = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -323,10 +415,15 @@ public class registrationform extends javax.swing.JFrame {
 
         Container.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 160, 220, 180));
 
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setText("SELECT");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        Container.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 360, 130, 30));
+        select.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        select.setText("SELECT");
+        select.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectActionPerformed(evt);
+            }
+        });
+        Container.add(select, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 360, 130, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,58 +465,84 @@ public class registrationform extends javax.swing.JFrame {
     }//GEN-LAST:event_firstnameActionPerformed
 
     private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
-        
-        
-      if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty() ||
-    cn.getText().isEmpty() || un.getText().isEmpty() || pw.getText().isEmpty() || 
-    cpass.getText().isEmpty() || ans.getText().isEmpty()) {
+                       
+    if (firstname.getText().isEmpty() || lastname.getText().isEmpty() || email.getText().isEmpty() ||
+        cn.getText().isEmpty() || un.getText().isEmpty() || pw.getText().isEmpty() || 
+        cpass.getText().isEmpty() || ans.getText().isEmpty()) {
 
-    JOptionPane.showMessageDialog(null, "All fields are required!");
+        JOptionPane.showMessageDialog(null, "All fields are required!");
+        return;
 
     } else if (pw.getText().length() < 8) {
-    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
-    pw.setText("");
-    cpass.setText("");
-    } else if (!email.getText().matches("^[\\w.-]+@gmail\\.com$")) {
-    JOptionPane.showMessageDialog(null, "Invalid email format. Must end with @gmail.com.");
-    email.setText("");
-    } else if (!isValidContactNumber(cn.getText())) {
-    JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
-    cn.setText("");
-    } else if (duplicateCheck()) {
-    JOptionPane.showMessageDialog(null, "Duplicate user exists!");
+        JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
+        pw.setText("");
+        cpass.setText("");
+        return;
+
     } else if (!pw.getText().equals(cpass.getText())) {
-    JOptionPane.showMessageDialog(null, "Passwords do not match.");
-    pw.setText("");
-    cpass.setText("");
-} else {
-    dbConnector dbc = new dbConnector();
+        JOptionPane.showMessageDialog(null, "Passwords do not match.");
+        pw.setText("");
+        cpass.setText("");
+        return;
+
+    } else if (!email.getText().matches("^[\\w.-]+@gmail\\.com$")) {
+        JOptionPane.showMessageDialog(null, "Invalid email format. Must end with @gmail.com.");
+        email.setText("");
+        return;
+
+    } else if (!cn.getText().matches("\\d{11}")) {
+        JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
+        cn.setText("");
+        return;
+
+    } else if (duplicateCheck()) {
+        JOptionPane.showMessageDialog(null, "Duplicate user exists!");
+        return;
+    }
 
     try {
-        String hashedPassword = passwordHasher.hashPassword(pw.getText());
+        dbConnector dbc = new dbConnector();
+        String hashedPass = passwordHasher.hashPassword(pw.getText());
         String hashedAnswer = passwordHasher.hashPassword(ans.getText());
+        String status = "Pending";
+        String image = "Undecided";
         String question = sq.getSelectedItem().toString();
 
-        String query = "INSERT INTO tbl_user (user_firstname, user_lastname, user_email, user_contact, user_username, user_password, user_usertype, user_status, user_security_question, user_security_answer) "
-                     + "VALUES ('" + firstname.getText() + "','" + lastname.getText() + "','" + email.getText() + "','" + cn.getText() + "','" + un.getText() + "','" + hashedPassword + "', '"
-                     + ut.getSelectedItem() + "','Pending', '" + question + "', '" + hashedAnswer + "')";
+        String sql = "INSERT INTO tbl_user (user_firstname, user_lastname, user_email, user_contact, user_username, user_password, user_usertype, user_status, user_image, user_security_question, user_security_answer) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        if (dbc.insertData(query)) {
+        PreparedStatement pst = dbc.connect.prepareStatement(sql);
+        pst.setString(1, firstname.getText());
+        pst.setString(2, lastname.getText());
+        pst.setString(3, email.getText());
+        pst.setString(4, cn.getText());
+        pst.setString(5, un.getText());
+        pst.setString(6, hashedPass);
+        pst.setString(7, ut.getSelectedItem().toString());
+        pst.setString(8, status);
+        pst.setString(9, image);
+        pst.setString(10, question);
+        pst.setString(11, hashedAnswer);
+
+        int inserted = pst.executeUpdate();
+
+        if (inserted > 0) {
             JOptionPane.showMessageDialog(null, "Inserted Successfully!");
             loginForm lfr = new loginForm();
             lfr.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Connection Error!");
+            JOptionPane.showMessageDialog(null, "Registration failed!");
         }
-    } catch (NoSuchAlgorithmException ex) {
+
+        pst.close();
+
+    } catch (Exception ex) {
         ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Password hashing failed.");
+        JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
     }
-}
-    }
-    private boolean isValidContactNumber(String contact) {
-    return contact.matches("\\d{11}"); 
+
+
     }//GEN-LAST:event_regActionPerformed
 
     private void lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameActionPerformed
@@ -456,6 +579,31 @@ public class registrationform extends javax.swing.JFrame {
     private void utActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_utActionPerformed
+
+    private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
+       JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        selectedFile = fileChooser.getSelectedFile();
+                        destination = "src/userimages/" + selectedFile.getName();
+                        path  = selectedFile.getAbsolutePath();
+                        
+                        
+                        if(FileExistenceChecker(path) == 1){
+                          JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                            destination = "";
+                            path="";
+                        }else{
+                            image.setIcon(ResizeImage(path, null, image));
+                            select.setEnabled(true);
+                           
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("File Error!");
+                    }
+                }
+    }//GEN-LAST:event_selectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,7 +650,6 @@ public class registrationform extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstname;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -522,6 +669,7 @@ public class registrationform extends javax.swing.JFrame {
     private javax.swing.JTextField lastname;
     private javax.swing.JPasswordField pw;
     private javax.swing.JButton reg;
+    public javax.swing.JButton select;
     private javax.swing.JCheckBox sp;
     private javax.swing.JComboBox<String> sq;
     private javax.swing.JTextField un;

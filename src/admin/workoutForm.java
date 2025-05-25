@@ -5,6 +5,7 @@
  */
 package admin;
 
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.sql.PreparedStatement;
@@ -155,6 +156,9 @@ public class workoutForm extends javax.swing.JFrame {
         refresh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         refresh.setForeground(new java.awt.Color(0, 153, 153));
         refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 refreshMouseEntered(evt);
             }
@@ -389,39 +393,56 @@ public class workoutForm extends javax.swing.JFrame {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
         int selectedRow = workoutTable.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a workout to delete.");
-            return;
+
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a workout to delete.");
+    return;
+}
+
+int workoutId = (int) workoutTable.getValueAt(selectedRow, 0);
+int confirm = JOptionPane.showConfirmDialog(
+    this,
+    "Are you sure you want to delete workout with ID: " + workoutId + "?",
+    "Confirm Delete",
+    JOptionPane.YES_NO_OPTION
+);
+
+if (confirm == JOptionPane.YES_OPTION) {
+    try {
+        dbConnector dbc = new dbConnector();
+
+        String deleteQuery = "DELETE FROM tbl_workout WHERE workout_id = ?";
+        PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
+        ps.setInt(1, workoutId);
+        int rowsAffected = ps.executeUpdate();
+        ps.close();
+
+        if (rowsAffected > 0) {
+
+            
+            Session sess = Session.getInstance();
+            int currentUserId = sess.getUserId();
+
+            String logAction = "Deleted Workout with ID: " + workoutId;
+            String logQuery = "INSERT INTO logs (user_id, action, date) VALUES (?, ?, NOW())";
+            PreparedStatement logPst = dbc.connect.prepareStatement(logQuery);
+            logPst.setInt(1, currentUserId);
+            logPst.setString(2, logAction);
+            logPst.executeUpdate();
+            logPst.close();
+
+            JOptionPane.showMessageDialog(this, "Workout ID " + workoutId + " deleted successfully.");
+            ((DefaultTableModel) workoutTable.getModel()).removeRow(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to delete workout.");
         }
-        int workoutId = (int) workoutTable.getValueAt(selectedRow, 0);
-        int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete workout with ID: " + workoutId + "?",
-            "Confirm Delete",
-            JOptionPane.YES_NO_OPTION
-        );
 
-        if (confirm == JOptionPane.YES_OPTION) {
-            try {
-                dbConnector dbc = new dbConnector();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
 
-                String deleteQuery = "DELETE FROM tbl_workout WHERE workout_id = ?";
-                PreparedStatement ps = dbc.connect.prepareStatement(deleteQuery);
-                ps.setInt(1, workoutId);
-                int rowsAffected = ps.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "Workout ID " + workoutId + " Deleted successfully.");
-                    ((DefaultTableModel) workoutTable.getModel()).removeRow(selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete Workout.");
-                }
-
-                ps.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
-            }
-        }
 
     }//GEN-LAST:event_deleteMouseClicked
 
@@ -495,6 +516,15 @@ if (rowIndex < 0) {
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
+       DefaultTableModel model = (DefaultTableModel) workoutTable.getModel();
+    model.setRowCount(0);
+
+   
+
+    JOptionPane.showMessageDialog(null, "Form has been refreshed.");
+    }//GEN-LAST:event_refreshMouseClicked
 
     /**
      * @param args the command line arguments
